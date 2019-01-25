@@ -24,9 +24,9 @@ public class ITX {
 	    // Configure remote file request for Linear16
 	    RecognitionConfig config =
 	        RecognitionConfig.newBuilder()
-	            .setEncoding(AudioEncoding.FLAC)
+	            .setEncoding(AudioEncoding.LINEAR16)
 	            .setLanguageCode("NO")
-	            .setSampleRateHertz(16000)
+	            .setSampleRateHertz(44100)
 	            .build();
 	    RecognitionAudio audio = RecognitionAudio.newBuilder().setUri(gcsUri).build();
 	    // Use non-blocking call for getting file transcription
