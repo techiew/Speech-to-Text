@@ -66,8 +66,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/api/grpc/proto-google-cloud-speech-v1/0.44.0/proto-google-cloud-speech-v1-0.44.0-sources.jar",
-      "path": "com/google/api/grpc/proto-google-cloud-speech-v1/0.44.0/proto-google-cloud-speech-v1-0.44.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/api/grpc/proto-google-cloud-speech-v1/0.45.0/proto-google-cloud-speech-v1-0.45.0-sources.jar",
+      "path": "com/google/api/grpc/proto-google-cloud-speech-v1/0.45.0/proto-google-cloud-speech-v1-0.45.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -87,7 +87,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "0.44.0"
+          "value": "0.45.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -97,8 +97,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/api/grpc/proto-google-cloud-speech-v1beta1/0.44.0/proto-google-cloud-speech-v1beta1-0.44.0-sources.jar",
-      "path": "com/google/api/grpc/proto-google-cloud-speech-v1beta1/0.44.0/proto-google-cloud-speech-v1beta1-0.44.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/api/grpc/proto-google-cloud-speech-v1beta1/0.45.0/proto-google-cloud-speech-v1beta1-0.45.0-sources.jar",
+      "path": "com/google/api/grpc/proto-google-cloud-speech-v1beta1/0.45.0/proto-google-cloud-speech-v1beta1-0.45.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -118,7 +118,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "0.44.0"
+          "value": "0.45.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -128,8 +128,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/api/grpc/proto-google-cloud-speech-v1p1beta1/0.44.0/proto-google-cloud-speech-v1p1beta1-0.44.0-sources.jar",
-      "path": "com/google/api/grpc/proto-google-cloud-speech-v1p1beta1/0.44.0/proto-google-cloud-speech-v1p1beta1-0.44.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/api/grpc/proto-google-cloud-speech-v1p1beta1/0.45.0/proto-google-cloud-speech-v1p1beta1-0.45.0-sources.jar",
+      "path": "com/google/api/grpc/proto-google-cloud-speech-v1p1beta1/0.45.0/proto-google-cloud-speech-v1p1beta1-0.45.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -149,7 +149,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "0.44.0"
+          "value": "0.45.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -252,8 +252,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/api/gax/1.37.0/gax-1.37.0-sources.jar",
-      "path": "com/google/api/gax/1.37.0/gax-1.37.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/api/gax/1.38.0/gax-1.38.0-sources.jar",
+      "path": "com/google/api/gax/1.38.0/gax-1.38.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -273,7 +273,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "1.37.0"
+          "value": "1.38.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -283,8 +283,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/api/gax-grpc/1.37.0/gax-grpc-1.37.0-sources.jar",
-      "path": "com/google/api/gax-grpc/1.37.0/gax-grpc-1.37.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/api/gax-grpc/1.38.0/gax-grpc-1.38.0-sources.jar",
+      "path": "com/google/api/gax-grpc/1.38.0/gax-grpc-1.38.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -304,7 +304,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "1.37.0"
+          "value": "1.38.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -314,8 +314,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/api/gax-httpjson/0.54.0/gax-httpjson-0.54.0-sources.jar",
-      "path": "com/google/api/gax-httpjson/0.54.0/gax-httpjson-0.54.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/api/gax-httpjson/0.55.0/gax-httpjson-0.55.0-sources.jar",
+      "path": "com/google/api/gax-httpjson/0.55.0/gax-httpjson-0.55.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -335,7 +335,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "0.54.0"
+          "value": "0.55.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -345,8 +345,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/apis/google-api-services-storage/v1-rev20181013-1.27.0/google-api-services-storage-v1-rev20181013-1.27.0-sources.jar",
-      "path": "com/google/apis/google-api-services-storage/v1-rev20181013-1.27.0/google-api-services-storage-v1-rev20181013-1.27.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/apis/google-api-services-storage/v1-rev20181109-1.27.0/google-api-services-storage-v1-rev20181109-1.27.0-sources.jar",
+      "path": "com/google/apis/google-api-services-storage/v1-rev20181109-1.27.0/google-api-services-storage-v1-rev20181109-1.27.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -366,7 +366,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "v1-rev20181013-1.27.0"
+          "value": "v1-rev20181109-1.27.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -438,8 +438,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-core/1.61.0/google-cloud-core-1.61.0-sources.jar",
-      "path": "com/google/cloud/google-cloud-core/1.61.0/google-cloud-core-1.61.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-core/1.62.0/google-cloud-core-1.62.0-sources.jar",
+      "path": "com/google/cloud/google-cloud-core/1.62.0/google-cloud-core-1.62.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -459,7 +459,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "1.61.0"
+          "value": "1.62.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -469,8 +469,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-core-grpc/1.61.0/google-cloud-core-grpc-1.61.0-sources.jar",
-      "path": "com/google/cloud/google-cloud-core-grpc/1.61.0/google-cloud-core-grpc-1.61.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-core-grpc/1.62.0/google-cloud-core-grpc-1.62.0-sources.jar",
+      "path": "com/google/cloud/google-cloud-core-grpc/1.62.0/google-cloud-core-grpc-1.62.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -490,7 +490,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "1.61.0"
+          "value": "1.62.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -500,8 +500,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-core-http/1.61.0/google-cloud-core-http-1.61.0-sources.jar",
-      "path": "com/google/cloud/google-cloud-core-http/1.61.0/google-cloud-core-http-1.61.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-core-http/1.62.0/google-cloud-core-http-1.62.0-sources.jar",
+      "path": "com/google/cloud/google-cloud-core-http/1.62.0/google-cloud-core-http-1.62.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -521,7 +521,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "1.61.0"
+          "value": "1.62.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -531,8 +531,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-speech/0.79.0-beta/google-cloud-speech-0.79.0-beta-sources.jar",
-      "path": "com/google/cloud/google-cloud-speech/0.79.0-beta/google-cloud-speech-0.79.0-beta.jar",
+      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-speech/0.80.0-beta/google-cloud-speech-0.80.0-beta-sources.jar",
+      "path": "com/google/cloud/google-cloud-speech/0.80.0-beta/google-cloud-speech-0.80.0-beta.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -552,7 +552,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "0.79.0-beta"
+          "value": "0.80.0-beta"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -562,8 +562,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-storage/1.61.0/google-cloud-storage-1.61.0-sources.jar",
-      "path": "com/google/cloud/google-cloud-storage/1.61.0/google-cloud-storage-1.61.0.jar",
+      "sourceAttachmentPath": "BIN/com/google/cloud/google-cloud-storage/1.62.0/google-cloud-storage-1.62.0-sources.jar",
+      "path": "com/google/cloud/google-cloud-storage/1.62.0/google-cloud-storage-1.62.0.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -583,7 +583,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "1.61.0"
+          "value": "1.62.0"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -996,6 +996,37 @@
     },
     {
       "accessRules": [],
+      "sourceAttachmentPath": "BIN/io/grpc/grpc-alts/1.17.1/grpc-alts-1.17.1-sources.jar",
+      "path": "io/grpc/grpc-alts/1.17.1/grpc-alts-1.17.1.jar",
+      "attributes": [
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
+          "value": "central"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.groupid",
+          "value": "io.grpc"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.artifactId",
+          "value": "grpc-alts"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.type",
+          "value": "jar"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
+          "value": "1.17.1"
+        },
+        {
+          "name": "org.eclipse.jst.component.dependency",
+          "value": "/WEB-INF/lib"
+        }
+      ]
+    },
+    {
+      "accessRules": [],
       "sourceAttachmentPath": "BIN/io/grpc/grpc-auth/1.17.1/grpc-auth-1.17.1-sources.jar",
       "path": "io/grpc/grpc-auth/1.17.1/grpc-auth-1.17.1.jar",
       "attributes": [
@@ -1072,6 +1103,37 @@
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.artifactId",
           "value": "grpc-core"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.type",
+          "value": "jar"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
+          "value": "1.17.1"
+        },
+        {
+          "name": "org.eclipse.jst.component.dependency",
+          "value": "/WEB-INF/lib"
+        }
+      ]
+    },
+    {
+      "accessRules": [],
+      "sourceAttachmentPath": "BIN/io/grpc/grpc-grpclb/1.17.1/grpc-grpclb-1.17.1-sources.jar",
+      "path": "io/grpc/grpc-grpclb/1.17.1/grpc-grpclb-1.17.1.jar",
+      "attributes": [
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
+          "value": "central"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.groupid",
+          "value": "io.grpc"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.artifactId",
+          "value": "grpc-grpclb"
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.type",
@@ -1337,8 +1399,8 @@
     },
     {
       "accessRules": [],
-      "sourceAttachmentPath": "BIN/joda-time/joda-time/2.9.2/joda-time-2.9.2-sources.jar",
-      "path": "joda-time/joda-time/2.9.2/joda-time-2.9.2.jar",
+      "sourceAttachmentPath": "BIN/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5-sources.jar",
+      "path": "org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -1346,11 +1408,11 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.groupid",
-          "value": "joda-time"
+          "value": "org.apache.commons"
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.artifactId",
-          "value": "joda-time"
+          "value": "commons-lang3"
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.type",
@@ -1358,7 +1420,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "2.9.2"
+          "value": "3.5"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
@@ -1555,7 +1617,7 @@
         "repository": "central",
         "groupId": "com.google.api.grpc",
         "artifactId": "proto-google-cloud-speech-v1",
-        "version": "0.44.0",
+        "version": "0.45.0",
         "type": "jar"
       },
       "export": true,
@@ -1568,7 +1630,7 @@
         "repository": "central",
         "groupId": "com.google.api.grpc",
         "artifactId": "proto-google-cloud-speech-v1beta1",
-        "version": "0.44.0",
+        "version": "0.45.0",
         "type": "jar"
       },
       "export": true,
@@ -1581,7 +1643,7 @@
         "repository": "central",
         "groupId": "com.google.api.grpc",
         "artifactId": "proto-google-cloud-speech-v1p1beta1",
-        "version": "0.44.0",
+        "version": "0.45.0",
         "type": "jar"
       },
       "export": true,
@@ -1633,7 +1695,7 @@
         "repository": "central",
         "groupId": "com.google.api",
         "artifactId": "gax",
-        "version": "1.37.0",
+        "version": "1.38.0",
         "type": "jar"
       },
       "export": true,
@@ -1646,7 +1708,7 @@
         "repository": "central",
         "groupId": "com.google.api",
         "artifactId": "gax-grpc",
-        "version": "1.37.0",
+        "version": "1.38.0",
         "type": "jar"
       },
       "export": true,
@@ -1659,7 +1721,7 @@
         "repository": "central",
         "groupId": "com.google.api",
         "artifactId": "gax-httpjson",
-        "version": "0.54.0",
+        "version": "0.55.0",
         "type": "jar"
       },
       "export": true,
@@ -1672,7 +1734,7 @@
         "repository": "central",
         "groupId": "com.google.apis",
         "artifactId": "google-api-services-storage",
-        "version": "v1-rev20181013-1.27.0",
+        "version": "v1-rev20181109-1.27.0",
         "type": "jar"
       },
       "export": true,
@@ -1711,7 +1773,7 @@
         "repository": "central",
         "groupId": "com.google.cloud",
         "artifactId": "google-cloud-core",
-        "version": "1.61.0",
+        "version": "1.62.0",
         "type": "jar"
       },
       "export": true,
@@ -1724,7 +1786,7 @@
         "repository": "central",
         "groupId": "com.google.cloud",
         "artifactId": "google-cloud-core-grpc",
-        "version": "1.61.0",
+        "version": "1.62.0",
         "type": "jar"
       },
       "export": true,
@@ -1737,7 +1799,7 @@
         "repository": "central",
         "groupId": "com.google.cloud",
         "artifactId": "google-cloud-core-http",
-        "version": "1.61.0",
+        "version": "1.62.0",
         "type": "jar"
       },
       "export": true,
@@ -1750,7 +1812,7 @@
         "repository": "central",
         "groupId": "com.google.cloud",
         "artifactId": "google-cloud-speech",
-        "version": "0.79.0-beta",
+        "version": "0.80.0-beta",
         "type": "jar"
       },
       "export": true,
@@ -1763,7 +1825,7 @@
         "repository": "central",
         "groupId": "com.google.cloud",
         "artifactId": "google-cloud-storage",
-        "version": "1.61.0",
+        "version": "1.62.0",
         "type": "jar"
       },
       "export": true,
@@ -1944,6 +2006,19 @@
       "mavenCoordinates": {
         "repository": "central",
         "groupId": "io.grpc",
+        "artifactId": "grpc-alts",
+        "version": "1.17.1",
+        "type": "jar"
+      },
+      "export": true,
+      "fixedVersion": false,
+      "pinned": false
+    },
+    {
+      "filters": [],
+      "mavenCoordinates": {
+        "repository": "central",
+        "groupId": "io.grpc",
         "artifactId": "grpc-auth",
         "version": "1.17.1",
         "type": "jar"
@@ -1971,6 +2046,19 @@
         "repository": "central",
         "groupId": "io.grpc",
         "artifactId": "grpc-core",
+        "version": "1.17.1",
+        "type": "jar"
+      },
+      "export": true,
+      "fixedVersion": false,
+      "pinned": false
+    },
+    {
+      "filters": [],
+      "mavenCoordinates": {
+        "repository": "central",
+        "groupId": "io.grpc",
+        "artifactId": "grpc-grpclb",
         "version": "1.17.1",
         "type": "jar"
       },
@@ -2086,9 +2174,9 @@
       "filters": [],
       "mavenCoordinates": {
         "repository": "central",
-        "groupId": "joda-time",
-        "artifactId": "joda-time",
-        "version": "2.9.2",
+        "groupId": "org.apache.commons",
+        "artifactId": "commons-lang3",
+        "version": "3.5",
         "type": "jar"
       },
       "export": true,
