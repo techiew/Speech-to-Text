@@ -18,6 +18,8 @@ public class ITX {
 	 *
 	 * @param gcsUri the path to the remote LINEAR16 audio file to transcribe.
 	 */
+	
+	//Transkriberer lydfilen. Burde renames. 
 	public ITX(String gcsUri) throws Exception {
 	  // Instantiates a client with GOOGLE_APPLICATION_CREDENTIALS
 	  try (SpeechClient speech = SpeechClient.create()) {
