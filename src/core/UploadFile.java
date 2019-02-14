@@ -42,6 +42,7 @@ public class UploadFile implements Runnable {
 	
 	public UploadFile(String filePath) {
 		givenFilePath = filePath;
+		af = new AnalyseFile();
 	}
 	
 	@Override
