@@ -10,7 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import core.SpeechToText;
+import core.UploadFile;
 
 public class GuiController {
 
@@ -32,7 +32,7 @@ public class GuiController {
     @FXML
     public void chooseFile(ActionEvent event) {
 
- 	   Stage s = MyApplication.primaryStage;
+ 	   Stage s = Gui.primaryStage;
 
  	   FileChooser fileChooser = new FileChooser();
  	   fileChooser.setTitle("Velg en lydfil");
@@ -50,13 +50,13 @@ public class GuiController {
 
        //System.out.println(selectedFile);
         
-       MyApplication.selectedFile = selectedFile;
+       Gui.selectedFile = selectedFile;
        buttonStartProcessing.setDisable(false);
     }
 
     @FXML
     void startFileAnalysis(MouseEvent event) {
-    	new Thread(new SpeechToText(MyApplication.selectedFile.getPath())).start();
+    	new Thread(new UploadFile(Gui.selectedFile.getPath())).start();
     }
 
 }
