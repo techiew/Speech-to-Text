@@ -22,7 +22,7 @@ import com.google.cloud.speech.v1p1beta1.SpeechClient;
 import com.google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative;
 import com.google.cloud.speech.v1p1beta1.SpeechRecognitionResult;
 
-public class SpeechToText {
+public class SpeechToText implements Runnable {
 
 	/**
 	 * Performs non-blocking speech recognition on remote FLAC file and prints
@@ -35,10 +35,17 @@ public class SpeechToText {
 	private byte[] selectedSoundFileBytes;
 	private String selectedSoundFileName;
 	private String soundFileGcsUri;
+	private String givenFilePath;
 	//List<SpeechRecognitionResult> results; -- for å lagre resultatene senere
 	
 	public SpeechToText(String filePath) {
-		initSoundFile(filePath);
+		givenFilePath = filePath;
+	}
+	
+	@Override
+	public void run()
+	{
+		initSoundFile(givenFilePath);
 		uploadFileToGoogleCloud(selectedSoundFileBytes, selectedSoundFileName);
 		analyzeSoundFile(soundFileGcsUri);
 	}
@@ -74,11 +81,11 @@ public class SpeechToText {
 	private void uploadFileToGoogleCloud(byte[] soundFileByteArray, String filename) {
 		
 		Storage storage = StorageOptions.getDefaultInstance().getService();
-		BlobId blobId = BlobId.of("itx_test1_test2", filename);
+		BlobId blobId = BlobId.of("goodest_team_lydfiler", filename);
 		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
 		Blob blob = storage.create(blobInfo,soundFileByteArray); 
-		String gcsUri = "gs://itx_test1_test2/" + filename;
-		System.out.println("Filen er lastet opp under" + gcsUri);
+		String gcsUri = "gs://goodest_team_lydfiler/" + filename;
+		System.out.println("Filen er lastet opp under: " + gcsUri);
 		
 		soundFileGcsUri = gcsUri;
 	}
@@ -98,7 +105,7 @@ public class SpeechToText {
 					.longRunningRecognizeAsync(config, audio);
 			
 			while (!response.isDone()) {
-				System.out.println("Waiting for response...");
+				System.out.println("Venter på respons...");
 				Thread.sleep(10000);
 			}
 

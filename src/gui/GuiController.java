@@ -48,16 +48,15 @@ public class GuiController {
 
  	   labelFeedbackMsg.setText("Du har valgt filen:\n " + selectedFile.getName());
 
-        System.out.println("Button Clicked!");
-        //System.out.println(selectedFile);
+       //System.out.println(selectedFile);
         
-        MyApplication.selectedFile = selectedFile;
-        buttonStartProcessing.setDisable(false);
+       MyApplication.selectedFile = selectedFile;
+       buttonStartProcessing.setDisable(false);
     }
 
     @FXML
     void startFileAnalysis(MouseEvent event) {
-        new SpeechToText(MyApplication.selectedFile.getPath());
+    	new Thread(new SpeechToText(MyApplication.selectedFile.getPath())).start();
     }
 
 }
