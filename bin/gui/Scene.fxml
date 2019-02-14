@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="417.0" prefWidth="409.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GuiController">
+   <children>
+      <Button fx:id="buttonChooseFile" layoutX="153.0" layoutY="292.0" mnemonicParsing="false" onAction="#chooseFile" text="Velg lydfil">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <ImageView fx:id="imageLogo" fitHeight="206.0" fitWidth="348.0" layoutX="31.0" layoutY="14.0" pickOnBounds="true">
+         <image>
+            <Image url="@logo.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="labelHelp" layoutX="86.0" layoutY="245.0" text="Velg en lydfil med tale">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelFeedbackMsg" contentDisplay="CENTER" layoutX="20.0" layoutY="344.0" prefHeight="63.0" prefWidth="268.0" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonStartProcessing" disable="true" layoutX="293.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#startFileAnalysis" prefHeight="30.0" prefWidth="103.0" text="Analyser filen">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
