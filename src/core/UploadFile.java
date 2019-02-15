@@ -51,6 +51,7 @@ public class UploadFile implements Runnable {
 		initSoundFile(givenFilePath);
 		uploadFileToGoogleCloud(selectedSoundFileBytes, selectedSoundFileName);
 		af.analyseSoundFile(soundFileGcsUri);
+		af.parseOutput();
 	}
 	
 	private void initSoundFile(String filePath) {
