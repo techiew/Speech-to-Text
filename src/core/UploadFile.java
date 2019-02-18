@@ -22,36 +22,15 @@ import com.google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative;
 import com.google.cloud.speech.v1p1beta1.SpeechRecognitionResult;
 import core.AnalyseFile;
 
-public class UploadFile implements Runnable {
+public class UploadFile {
 
-	/**
-	 * Performs non-blocking speech recognition on remote FLAC file and prints
-	 * the transcription.
-	 *
-	 * @param gcsUri
-	 *            the path to the remote LINEAR16 audio file to transcribe.
-	 */
-	
 	private byte[] selectedSoundFileBytes;
 	private String selectedSoundFileName;
-	private String soundFileGcsUri;
-	private String givenFilePath;
-	//List<SpeechRecognitionResult> results; -- for å lagre resultatene senere
 	
-	private AnalyseFile af;
-	
-	public UploadFile(String filePath) {
-		givenFilePath = filePath;
-		af = new AnalyseFile();
-	}
-	
-	@Override
-	public void run()
-	{
-		initSoundFile(givenFilePath);
-		uploadFileToGoogleCloud(selectedSoundFileBytes, selectedSoundFileName);
-		af.analyseSoundFile(soundFileGcsUri);
-		af.parseOutput();
+	public String uploadFile(String filePath) {
+		initSoundFile(filePath);
+		String gcsUri = uploadFileToGoogleCloud(selectedSoundFileBytes, selectedSoundFileName);
+		return gcsUri;
 	}
 	
 	private void initSoundFile(String filePath) {
@@ -82,7 +61,7 @@ public class UploadFile implements Runnable {
 		selectedSoundFileName = f.getName();
 	}
 	
-	private void uploadFileToGoogleCloud(byte[] soundFileByteArray, String filename) {
+	private String uploadFileToGoogleCloud(byte[] soundFileByteArray, String filename) {
 		
 		Storage storage = StorageOptions.getDefaultInstance().getService();
 		BlobId blobId = BlobId.of("goodest_team_lydfiler", filename);
@@ -91,7 +70,7 @@ public class UploadFile implements Runnable {
 		String gcsUri = "gs://goodest_team_lydfiler/" + filename;
 		System.out.println("Filen er lastet opp under: " + gcsUri);
 		
-		soundFileGcsUri = gcsUri;
+		return gcsUri;
 	}
 	
 }

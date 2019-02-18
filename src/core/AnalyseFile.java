@@ -17,7 +17,15 @@ import com.google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding;
 
 public class AnalyseFile {
 	
-	ArrayList<wordBank> wordbank = new ArrayList<wordBank>();
+	/**
+	 * Performs non-blocking speech recognition on remote FLAC file and prints
+	 * the transcription.
+	 *
+	 * @param gcsUri
+	 *            the path to the remote LINEAR16 audio file to transcribe.
+	 */
+	
+	ArrayList<Word> wordBank = new ArrayList<Word>();
 	
 	public void analyseSoundFile(String gcsUri) {
 		
@@ -45,29 +53,32 @@ public class AnalyseFile {
 
 			List<SpeechRecognitionResult> results = response.get().getResultsList();
 			System.out.println("Svar:");
+			
 			for (SpeechRecognitionResult result : results) {
 				// There can be several alternative transcripts for a given
 				// chunk of speech. Just use the
 				// first (most likely) one here.
 				SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
 				System.out.printf("Transcription: %s\n", alternative.getTranscript());
+				
 				for (WordInfo wordInfo : alternative.getWordsList()) {
 					//finner ordet
 					String word = wordInfo.getWord();
-			        
+					
 					// finner start tiden
-			        float startNanosecond = (wordInfo.getStartTime().getNanos() / 100000000);
-			        float startSecond = wordInfo.getStartTime().getSeconds();
-			        float timeStampStart = startSecond + (startNanosecond / 10);
-			        
-			        //finner slutt tiden
-			        float endNanosecond = (wordInfo.getEndTime().getNanos() / 100000000);
-			        float endSecond = wordInfo.getStartTime().getSeconds();
-			        float timeStampEnd = endSecond + (endNanosecond / 10);
-			        
-			        wordbank.add(new wordBank(word, timeStampStart, timeStampEnd));
-			       // System.out.println(wordbank.get(i).getWord() + wordbank.get(i).getStartTime() + wordbank.get(i).getEndTime());
-			      }
+					float startNanosecond = (wordInfo.getStartTime().getNanos() / 100000000);
+					float startSecond = wordInfo.getStartTime().getSeconds();
+					float timeStampStart = startSecond + (startNanosecond / 10);
+					
+					//finner slutt tiden
+					float endNanosecond = (wordInfo.getEndTime().getNanos() / 100000000);
+					float endSecond = wordInfo.getStartTime().getSeconds();
+					float timeStampEnd = endSecond + (endNanosecond / 10);
+					    
+					wordBank.add(new Word(word, timeStampStart, timeStampEnd));
+					//System.out.println(wordbank.get(i).getWord() + wordbank.get(i).getStartTime() + wordbank.get(i).getEndTime());
+				}
+				
 			}
 			
 		} catch (IOException e) {
@@ -86,10 +97,10 @@ public class AnalyseFile {
 	public void parseOutput() {
 		//Hver lydfil har sin egen liste. Ord og timestamps blir satt kronologisk inn i listen, så vi vet at #0 i listen kommer før #1, derfor må vi bare sammenligne liste1.get(0) med liste2.get(0) og
 		//se hvem som er først : )
-		System.out.println(wordbank.size());
-		System.out.println("jeg håper det står Dette: " + wordbank.get(0).getWord());
-		System.out.println("jeg håper det står en: " + wordbank.get(2).getWord());
-		System.out.println("jeg håper det står nå " + wordbank.get(12).getWord());
+		System.out.println(wordBank.size());
+		System.out.println("jeg håper det står Dette: " + wordBank.get(0).getWord());
+		System.out.println("jeg håper det står en: " + wordBank.get(2).getWord());
+		System.out.println("jeg håper det står nå " + wordBank.get(12).getWord());
 	}
 	
 }

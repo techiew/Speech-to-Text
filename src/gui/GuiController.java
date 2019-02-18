@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.File;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,12 +11,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import core.UploadFile;
 
 public class GuiController {
 
     @FXML
-    private Button buttonChooseFile;
+    private Button buttonChooseFiles;
 
     @FXML
     private Button buttonStartProcessing;
@@ -30,7 +30,7 @@ public class GuiController {
     private Label labelFeedbackMsg;
 
     @FXML
-    public void chooseFile(ActionEvent event) {
+    public void chooseFiles(ActionEvent event) {
 
  	   Stage s = Gui.primaryStage;
 
@@ -41,6 +41,9 @@ public class GuiController {
  	           );
  	   
  	   File selectedFile = fileChooser.showOpenDialog(s);
+ 	   ArrayList<File> selectedFiles = new ArrayList<File>();
+ 	   
+ 	   selectedFiles.add(selectedFile);
  	   
  	   if (selectedFile != null) {
  		   System.out.println(selectedFile);
@@ -48,15 +51,13 @@ public class GuiController {
 
  	   labelFeedbackMsg.setText("Du har valgt filen:\n " + selectedFile.getName());
 
-       //System.out.println(selectedFile);
-        
-       Gui.selectedFile = selectedFile;
+       Gui.parentObject.setGuiSelectedFiles(selectedFiles);
        buttonStartProcessing.setDisable(false);
     }
 
     @FXML
     void startFileAnalysis(MouseEvent event) {
-    	new Thread(new UploadFile(Gui.selectedFile.getPath())).start();
+    	Gui.parentObject.startProcess();
     }
 
 }

@@ -2,6 +2,7 @@ package gui;
 
 import java.io.File;
 
+import core.SpeechToText;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,9 +12,11 @@ import javafx.stage.Stage;
 public class Gui extends Application {
 	
 	public static Stage primaryStage;
-	public static File selectedFile;
+	public static SpeechToText parentObject;
+	
 
-    public void startApplication() {
+    public void startApplication(SpeechToText stt) {
+    	this.parentObject = stt;
     	launch();
     }
     
