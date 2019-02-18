@@ -1,7 +1,5 @@
 package gui;
 
-import java.io.File;
-
 import core.SpeechToText;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +14,7 @@ public class Gui extends Application {
 	
 
     public void startApplication(SpeechToText stt) {
-    	this.parentObject = stt;
+    	Gui.parentObject = stt;
     	launch();
     }
     

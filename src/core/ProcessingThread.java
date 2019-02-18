@@ -10,7 +10,6 @@ public class ProcessingThread implements Runnable {
 	
 	@Override
 	public void run() {
-		
 		UploadFile uf = new UploadFile();
 		AnalyseFile af = new AnalyseFile();
 		
