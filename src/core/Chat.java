@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public class Chat {
 
-	ArrayList<Participant> participants;
+	public ArrayList<Participant> participants;
 	
 }

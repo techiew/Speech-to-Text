@@ -9,29 +9,34 @@
 
 <AnchorPane prefHeight="417.0" prefWidth="409.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GuiController">
    <children>
-      <Button fx:id="buttonChooseFiles" layoutX="153.0" layoutY="292.0" mnemonicParsing="false" onAction="#chooseFiles" text="Velg lydfil">
+      <Button fx:id="buttonChooseFiles" layoutX="283.0" layoutY="322.0" mnemonicParsing="false" onAction="#chooseFiles" prefHeight="30.0" prefWidth="113.0" text="Velg filer">
          <font>
-            <Font size="18.0" />
+            <Font size="14.0" />
          </font></Button>
       <ImageView fx:id="imageLogo" fitHeight="206.0" fitWidth="348.0" layoutX="31.0" layoutY="14.0" pickOnBounds="true">
          <image>
             <Image url="@logo.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="labelHelp" layoutX="86.0" layoutY="245.0" text="Velg en lydfil med tale">
+      <Label fx:id="labelHelp" layoutX="38.0" layoutY="245.0" text="Velg en eller flere lydfiler med tale">
          <font>
-            <Font size="24.0" />
+            <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="labelFeedbackMsg" contentDisplay="CENTER" layoutX="20.0" layoutY="344.0" prefHeight="63.0" prefWidth="268.0" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="labelFeedbackMsg" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="321.0" prefHeight="76.0" prefWidth="254.0" textFill="#1548ff" wrapText="true">
          <font>
-            <Font size="18.0" />
+            <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="buttonStartProcessing" disable="true" layoutX="293.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#startFileAnalysis" prefHeight="30.0" prefWidth="103.0" text="Analyser filen">
+      <Button fx:id="buttonStartProcessing" disable="true" layoutX="283.0" layoutY="361.0" mnemonicParsing="false" onAction="#startFileAnalysis" prefHeight="30.0" prefWidth="113.0" text="Analyser filene">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <Label layoutX="38.0" layoutY="277.0" prefHeight="27.0" prefWidth="333.0" text="(Bruk CTRL + venstre museklikk for å velge flere filer)">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

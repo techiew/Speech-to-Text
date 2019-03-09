@@ -25,7 +25,8 @@ public class AnalyseFile {
 	 *            the path to the remote LINEAR16 audio file to transcribe.
 	 */
 	
-	ArrayList<Word> wordBank = new ArrayList<Word>();
+	private List<SpeechRecognitionResult> results;
+	private ArrayList<Word> wordBank = new ArrayList<Word>();
 	
 	public void analyseSoundFile(String gcsUri) {
 		
@@ -51,7 +52,7 @@ public class AnalyseFile {
 				Thread.sleep(10000);
 			}
 
-			List<SpeechRecognitionResult> results = response.get().getResultsList();
+			results = response.get().getResultsList();
 			System.out.println("Svar:");
 			
 			for (SpeechRecognitionResult result : results) {

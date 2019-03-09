@@ -1,5 +1,8 @@
 package core;
 
+import java.io.File;
+import java.util.ArrayList;
+
 public class ProcessingThread implements Runnable {
 
 	private SpeechToText stt;
@@ -12,11 +15,17 @@ public class ProcessingThread implements Runnable {
 	public void run() {
 		UploadFile uf = new UploadFile();
 		AnalyseFile af = new AnalyseFile();
+		ArrayList<File> selectedFiles = stt.getGuiSelectedFiles();
 		
-		String gcsUri = uf.uploadFile(stt.getGuiSelectedFiles().get(0).getAbsolutePath());
+		for(int i = 0; i < selectedFiles.size(); i++) {
+			String gcsUri = uf.uploadFile(stt.getGuiSelectedFiles().get(i).getAbsolutePath());
 		
-		if(gcsUri.length() > 0) {
-			af.analyseSoundFile(gcsUri);
+			if(gcsUri.length() > 0) {
+				af.analyseSoundFile(gcsUri);
+			} else {
+				System.out.println("Error: Hoppet over fil nummer " + i + " i analysen, feil med gcsUri");
+			}
+		
 		}
 		
 		stt.onProcessingDone();

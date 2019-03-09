@@ -13,9 +13,8 @@ public class SpeechToText {
 	private ArrayList<File> guiSelectedFiles;
 	
 	public void startProcess() {
+		//Vi gjør prosesseringen i en egen tråd for å ikke fryse GUI'en
 		new Thread(new ProcessingThread(this)).start();
-    	//new Thread(new UploadFile(Gui.selectedFile.getPath())).start();
-    	//new Thread(new AnalyseFile(gcsUri));
 	}
 	
 	//Callback function 
