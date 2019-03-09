@@ -18,7 +18,7 @@ public class ProcessingThread implements Runnable {
 		ArrayList<File> selectedFiles = stt.getGuiSelectedFiles();
 		
 		for(int i = 0; i < selectedFiles.size(); i++) {
-			String gcsUri = uf.uploadFile(stt.getGuiSelectedFiles().get(i).getAbsolutePath());
+			String gcsUri = uf.uploadFile(selectedFiles.get(i).getAbsolutePath());
 		
 			if(gcsUri.length() > 0) {
 				af.analyseSoundFile(gcsUri);

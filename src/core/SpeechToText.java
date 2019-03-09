@@ -45,8 +45,8 @@ public class SpeechToText {
 		return guiSelectedFiles;
 	}
 
-	public void setGuiSelectedFiles(ArrayList<File> guiSelectedFiles) {
-		this.guiSelectedFiles = guiSelectedFiles;
+	public void setGuiSelectedFiles(List<File> guiSelectedFiles) {
+		this.guiSelectedFiles = new ArrayList<File>(guiSelectedFiles);
 	}
 	
 }

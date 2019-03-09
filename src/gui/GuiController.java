@@ -60,17 +60,23 @@ public class GuiController {
 
  	   labelFeedbackMsg.setText("Du har valgt " + selectedFiles.size() + " filer");
 
-       Gui.parentObject.setGuiSelectedFiles(new ArrayList<File>(selectedFiles));
+       Gui.parentObject.setGuiSelectedFiles(selectedFiles);
        buttonStartProcessing.setDisable(false);
     }
 
     @FXML
-    void startFileAnalysis(MouseEvent event) {
+    void startFileAnalysis(ActionEvent event) {
     	
     	if(Gui.parentObject.getGuiSelectedFiles().size() > 0) {
         	buttonStartProcessing.setDisable(true);
         	labelFeedbackMsg.setText("Analyserer filene...");
-        	Gui.parentObject.startProcess();
+        	
+    		System.out.println("Disse filene vil bli analysert: ");
+        	for(int i = 0; i < Gui.parentObject.getGuiSelectedFiles().size(); i++) {
+        		System.out.println(Gui.parentObject.getGuiSelectedFiles().get(i).getName());
+        	}
+        	
+        	//Gui.parentObject.startProcess();
     	} else {
     		System.out.println("Kunne ikke starte analysen, feil med valgte filer");
     	}
