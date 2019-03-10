@@ -18,7 +18,8 @@ public class SpeechToText {
 	}
 	
 	//Callback function 
-	public void onProcessingDone() {
+	public void onProcessingDone(Chat chat) {
+		this.chat = chat;
 		System.out.println("Jeg klarte det!!!");
 	}
 	

@@ -20,7 +20,7 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="labelFeedbackMsg" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="321.0" prefHeight="76.0" prefWidth="254.0" textFill="#1548ff" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="141.0">
+      <Label fx:id="labelFeedbackMsg" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="321.0" prefHeight="76.0" prefWidth="254.0" text="TEST TEST TEST TEST TEST TEST TEST" textFill="#1548ff" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="141.0">
          <font>
             <Font size="14.0" />
          </font>

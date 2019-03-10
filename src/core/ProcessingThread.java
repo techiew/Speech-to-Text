@@ -13,6 +13,8 @@ public class ProcessingThread implements Runnable {
 	
 	@Override
 	public void run() {
+		Chat chat = new Chat();
+		
 		UploadFile uf = new UploadFile();
 		AnalyseFile af = new AnalyseFile();
 		ArrayList<File> selectedFiles = stt.getGuiSelectedFiles();
@@ -28,7 +30,7 @@ public class ProcessingThread implements Runnable {
 		
 		}
 		
-		stt.onProcessingDone();
+		stt.onProcessingDone(chat);
 	}
 
 }
