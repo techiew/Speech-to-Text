@@ -78,7 +78,7 @@ public class GuiController {
         		System.out.println(Gui.parentObject.getGuiSelectedFiles().get(i).getName());
         	}
         	
-        	//Gui.parentObject.startProcess();
+        	Gui.parentObject.startProcess();
     	} else {
     		System.out.println("Kunne ikke starte analysen, feil med valgte filer");
     	}

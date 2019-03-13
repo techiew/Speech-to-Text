@@ -33,9 +33,9 @@ public class AnalyseFile {
 	private ArrayList<Participant> participantData = new ArrayList<Participant>();
 	static int numOfParticipants = 1;
 	
-	public void analyseSoundFile(String gcsUri, int numOfParticipants) {
-		
-		this.numOfParticipants = numOfParticipants;
+	public void analyseSoundFile(String gcsUri, int numOfParticipantsKYS) {
+		System.out.println("Dette er nåværende gcsUri:" + gcsUri);
+		//this.numOfParticipants = numOfParticipants;
 		
 		// Instantiates a client with GOOGLE_APPLICATION_CREDENTIALS
 		try (SpeechClient speech = SpeechClient.create()) {
@@ -44,7 +44,6 @@ public class AnalyseFile {
 			RecognitionConfig config = RecognitionConfig.newBuilder()
 					.setEncoding(AudioEncoding.LINEAR16)
 					.setLanguageCode("NO")
-					.setSampleRateHertz(44100)
 					.setEnableWordTimeOffsets(true)
 					.build();
 			
@@ -68,7 +67,6 @@ public class AnalyseFile {
 				// first (most likely) one here.
 				SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
 				System.out.printf("Transcription: %s\n", alternative.getTranscript());
-				
 				for (WordInfo wordInfo : alternative.getWordsList()) {
 					//finner ordet
 					String word = wordInfo.getWord();
@@ -76,27 +74,29 @@ public class AnalyseFile {
 					// finner start tiden
 					float startNanosecond = (wordInfo.getStartTime().getNanos() / 100000000);
 					float startSecond = wordInfo.getStartTime().getSeconds();
-					float timeStampStart = startSecond + (startNanosecond / 10);
+					float timeStampStart = startSecond + (startNanosecond / 10 + (startNanosecond / 100) + (startNanosecond / 1000));
 					
 					//finner slutt tiden
 					float endNanosecond = (wordInfo.getEndTime().getNanos() / 100000000);
-					float endSecond = wordInfo.getStartTime().getSeconds();
-					float timeStampEnd = endSecond + (endNanosecond / 10);
+					float endSecond = wordInfo.getEndTime().getSeconds();
+					float timeStampEnd = endSecond + (endNanosecond / 10) + (endNanosecond / 100) + (endNanosecond / 1000);
 					
 					if (numOfParticipants == 1)
 					{
 						wordParticipant1.add(new Word(word, timeStampStart, timeStampEnd));
+						System.out.println("Fil nummer 1 blir mekka");
 					}
-					else if (numOfParticipants == 2)
+					if (numOfParticipants == 2)
 					{
 						wordParticipant2.add(new Word(word, timeStampStart, timeStampEnd));
+						System.out.println("Fil nummer 2 blir mekka");
 					}
 					
-					numOfParticipants++;
 					//System.out.println(wordbank.get(i).getWord() + wordbank.get(i).getStartTime() + wordbank.get(i).getEndTime());
 				}
-				
 			}
+			numOfParticipants++;
+			System.out.println(numOfParticipants);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -119,22 +119,43 @@ public class AnalyseFile {
 		String sentence = null;
 		//Midlertidig lagringsplass for startTiden til det første ordet. Brukes for å markere starten av setningen
 		List<Float> temporaryStorage = new ArrayList<Float>();
+		/*System.out.println("test i construct sentence");
+		System.out.println("Ordet til person 2:" + wordParticipant2.get(y).getWord());
+		System.out.println("Starttid: " + wordParticipant2.get(y).getStartTime() + "og sluttid:" + wordParticipant2.get(y).getEndTime());
+		System.out.println("hardcode:" + wordParticipant2.get(0).getWord() + wordParticipant2.get(1).getWord() + wordParticipant2.get(2).getWord() + wordParticipant2.get(3).getWord()); */
+		System.out.println("De 10 første ordene i Person1:");
+		for (int x = 0; x < wordParticipant1.size(); x++) {
+			System.out.println("Ordet til Person 1: " + wordParticipant1.get(x).getWord() + " StartTid: " + wordParticipant1.get(x).getStartTime() + " SluttTid: " + wordParticipant1.get(x).getEndTime());
+		}
+		System.out.println("De første 10 ordene i Person2");
+		for (int x = 0; x < wordParticipant2.size(); x++) {
+			System.out.println("Ordet til Person 2: " + wordParticipant2.get(x).getWord() + " StartTid: " + wordParticipant2.get(x).getStartTime() + " SluttTid: " + wordParticipant2.get(x).getEndTime());
+		}
 		
-		while (wordParticipant1.size() > i && wordParticipant2.size() > y)													   //Looper så lenge listene fortsatt har ord i seg
+		
+		
+		/*while (wordParticipant1.size() > i && wordParticipant2.size() > y)													   //Looper så lenge listene fortsatt har ord i seg
 		{
-			
+			System.out.println("første while loop starter");
 			while (wordParticipant1.get(i).getEndTime() > wordParticipant2.get(y).getStartTime())							   //Sjekk om at ord X ikke overrider med noen ord fra andre personen
 			{
-				temporaryStorage.add(wordParticipant1.get(i).getStartTime());												   //Adder startTiden i listen. Bare interessert i nummer 0
-				sentence = sentence + wordParticipant1.get(i);                                                                 //Setter ordet i en string
-				i++;
+				if (wordParticipant1.size() >= i) {
+					System.out.println("endtime på ordet:" + wordParticipant1.get(i).getEndTime());
+					System.out.println("starttime på person 2 ordet:" + wordParticipant2.get(y).getStartTime());
+					System.out.println("Størrelsen på I:" + i);
+					System.out.println("Størrlesen på Participant1:" + wordParticipant1.size());
+					temporaryStorage.add(wordParticipant1.get(i).getStartTime());												   //Adder startTiden i listen. Bare interessert i nummer 0
+					sentence = sentence + wordParticipant1.get(i);                                                                 //Setter ordet i en string
+					i++;
+				}
 			}
 			sentenceParticipant1.add(new Sentence(sentence, temporaryStorage.get(0), wordParticipant1.get(i).getEndTime()));   //Instansierer ny sentence objekt inn i listen
 			temporaryStorage.clear();																						   //Clearer midlertidig lagringsrommet. Sentence allerede lagd
 			sentence = "";																									   //Clearer setningen. Sentence allerede lagd
 			
-			while (wordParticipant2.get(y).getEndTime() > wordParticipant1.get(i).getStartTime())
+			while (wordParticipant2.get(y).getEndTime() > wordParticipant1.get(i).getStartTime() && i < wordParticipant1.size() && y < wordParticipant2.size())
 			{
+				System.out.println("hei fra andre while loop lol");
 				temporaryStorage.add(wordParticipant2.get(y).getStartTime());
 				sentence = sentence + wordParticipant2.get(y);
 				y++;
@@ -142,8 +163,11 @@ public class AnalyseFile {
 			sentenceParticipant2.add(new Sentence(sentence, temporaryStorage.get(0), wordParticipant1.get(y).getEndTime()));
 			temporaryStorage.clear();
 			sentence = "";
-			
-		}
+			System.out.println("Størrelsen på I:");
+			System.out.println("Størrelsen på Y:");
+			System.out.println("Størrlesen på Participant1:" + wordParticipant1.size());
+			System.out.println("Størrelsen på Participant2:" + wordParticipant2.size());
+		} */
 		
 		
 		//Hver lydfil har sin egen liste. Ord og timestamps blir satt kronologisk inn i listen, så vi vet at #0 i listen kommer før #1, derfor må vi bare sammenligne liste1.get(0) med liste2.get(0) og
