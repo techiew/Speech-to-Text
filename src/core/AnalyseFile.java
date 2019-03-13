@@ -84,20 +84,16 @@ public class AnalyseFile {
 					if (numOfParticipants == 1)
 					{
 						wordParticipant1.add(new Word(word, timeStampStart, timeStampEnd));
-						System.out.println("Fil nummer 1 blir mekka");
 					}
 					if (numOfParticipants == 2)
 					{
 						wordParticipant2.add(new Word(word, timeStampStart, timeStampEnd));
-						System.out.println("Fil nummer 2 blir mekka");
 					}
 					
 					//System.out.println(wordbank.get(i).getWord() + wordbank.get(i).getStartTime() + wordbank.get(i).getEndTime());
 				}
 			}
 			numOfParticipants++;
-			System.out.println(numOfParticipants);
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,18 +115,57 @@ public class AnalyseFile {
 		String sentence = null;
 		//Midlertidig lagringsplass for startTiden til det første ordet. Brukes for å markere starten av setningen
 		List<Float> temporaryStorage = new ArrayList<Float>();
-		/*System.out.println("test i construct sentence");
-		System.out.println("Ordet til person 2:" + wordParticipant2.get(y).getWord());
-		System.out.println("Starttid: " + wordParticipant2.get(y).getStartTime() + "og sluttid:" + wordParticipant2.get(y).getEndTime());
-		System.out.println("hardcode:" + wordParticipant2.get(0).getWord() + wordParticipant2.get(1).getWord() + wordParticipant2.get(2).getWord() + wordParticipant2.get(3).getWord()); */
-		System.out.println("De 10 første ordene i Person1:");
+		boolean participant1Complete = false;
+		boolean participant2Complete = false;
+		
+		while (participant1Complete == false && participant2Complete == false) {
+
+				while (wordParticipant1.get(i).getMeanTime() < wordParticipant2.get(y).getMeanTime() && participant1Complete == false) {
+					temporaryStorage.add(wordParticipant1.get(i).getStartTime());
+					sentence = sentence + " " + wordParticipant1.get(i).getWord();
+					if ((i + 1) == wordParticipant1.size()) {
+						participant1Complete = true;
+						break;
+					}
+					i++;
+				}
+				
+			if (!temporaryStorage.isEmpty()) {
+				sentenceParticipant1.add(new Sentence(sentence, temporaryStorage.get(0), wordParticipant1.get(i).getEndTime()));
+				System.out.println("Setning mekka for Person 1:" + sentence);
+				temporaryStorage.clear();
+				sentence = "";
+			}
+			
+				while (wordParticipant2.get(y).getMeanTime() < wordParticipant1.get(i).getMeanTime() && participant2Complete == false) {
+					temporaryStorage.add(wordParticipant2.get(y).getStartTime());
+					sentence = sentence + wordParticipant2.get(y).getWord();
+					if ((y + 1) == wordParticipant2.size()) {
+						participant2Complete = true;
+						break;
+					}
+					y++;
+				}
+				
+			if (!temporaryStorage.isEmpty()) {
+			sentenceParticipant2.add(new Sentence(sentence, temporaryStorage.get(0), wordParticipant2.get(y).getEndTime()));
+			System.out.println("Setning mekka for Person 2:" + sentence);
+			temporaryStorage.clear();
+			sentence = "";
+			}
+			
+		}
+		System.out.println("Setning metoden funka faktisk.");
+		
+		
+		/*System.out.println("De 10 første ordene i Person1:");
 		for (int x = 0; x < wordParticipant1.size(); x++) {
 			System.out.println("Ordet til Person 1: " + wordParticipant1.get(x).getWord() + " StartTid: " + wordParticipant1.get(x).getStartTime() + " SluttTid: " + wordParticipant1.get(x).getEndTime());
 		}
 		System.out.println("De første 10 ordene i Person2");
 		for (int x = 0; x < wordParticipant2.size(); x++) {
 			System.out.println("Ordet til Person 2: " + wordParticipant2.get(x).getWord() + " StartTid: " + wordParticipant2.get(x).getStartTime() + " SluttTid: " + wordParticipant2.get(x).getEndTime());
-		}
+		}*/
 		
 		
 		

@@ -14,9 +14,7 @@ public class ProcessingThread implements Runnable {
 	@Override
 	public void run() {
 		Chat chat = new Chat();
-		System.out.println("test1");
 		UploadFile uf = new UploadFile();
-		System.out.println("test");
 		AnalyseFile af = new AnalyseFile();
 		ArrayList<File> selectedFiles = stt.getGuiSelectedFiles();
 		System.out.println("antall filer valgt:" + selectedFiles.size());

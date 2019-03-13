@@ -24,4 +24,8 @@ public class Word {
 		return endTime;
 	}
 	
+	public float getMeanTime() {
+		return (startTime + endTime) / 2;
+	}
+	
 }
