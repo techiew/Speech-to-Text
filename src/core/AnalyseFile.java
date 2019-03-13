@@ -137,7 +137,7 @@ public class AnalyseFile {
 		/*while (wordParticipant1.size() > i && wordParticipant2.size() > y)													   //Looper så lenge listene fortsatt har ord i seg
 		{
 			System.out.println("første while loop starter");
-			while (wordParticipant1.get(i).getEndTime() > wordParticipant2.get(y).getStartTime())							   //Sjekk om at ord X ikke overrider med noen ord fra andre personen
+			while (wordParticipant1.get(i).getEndTime() < wordParticipant2.get(y).getStartTime())							   //Sjekk om at ord X ikke overrider med noen ord fra andre personen
 			{
 				if (wordParticipant1.size() >= i) {
 					System.out.println("endtime på ordet:" + wordParticipant1.get(i).getEndTime());
@@ -153,7 +153,7 @@ public class AnalyseFile {
 			temporaryStorage.clear();																						   //Clearer midlertidig lagringsrommet. Sentence allerede lagd
 			sentence = "";																									   //Clearer setningen. Sentence allerede lagd
 			
-			while (wordParticipant2.get(y).getEndTime() > wordParticipant1.get(i).getStartTime() && i < wordParticipant1.size() && y < wordParticipant2.size())
+			while (wordParticipant2.get(y).getEndTime() < wordParticipant1.get(i).getStartTime() && i < wordParticipant1.size() && y < wordParticipant2.size())
 			{
 				System.out.println("hei fra andre while loop lol");
 				temporaryStorage.add(wordParticipant2.get(y).getStartTime());
