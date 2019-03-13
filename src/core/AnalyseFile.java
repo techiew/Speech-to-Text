@@ -30,9 +30,12 @@ public class AnalyseFile {
 	private ArrayList<Word> wordParticipant2 = new ArrayList<Word>();
 	private ArrayList<Sentence> sentenceParticipant1 = new ArrayList<Sentence>();
 	private ArrayList<Sentence> sentenceParticipant2 = new ArrayList<Sentence>();
-	static int numberOfParticipants = 1;
+	private ArrayList<Participant> participantData = new ArrayList<Participant>();
+	static int numOfParticipants = 1;
 	
-	public void analyseSoundFile(String gcsUri) {
+	public void analyseSoundFile(String gcsUri, int numOfParticipants) {
+		
+		this.numOfParticipants = numOfParticipants;
 		
 		// Instantiates a client with GOOGLE_APPLICATION_CREDENTIALS
 		try (SpeechClient speech = SpeechClient.create()) {
@@ -80,15 +83,16 @@ public class AnalyseFile {
 					float endSecond = wordInfo.getStartTime().getSeconds();
 					float timeStampEnd = endSecond + (endNanosecond / 10);
 					
-					if (numberOfParticipants == 1)
+					if (numOfParticipants == 1)
 					{
 						wordParticipant1.add(new Word(word, timeStampStart, timeStampEnd));
 					}
-					else if (numberOfParticipants == 2)
+					else if (numOfParticipants == 2)
 					{
 						wordParticipant2.add(new Word(word, timeStampStart, timeStampEnd));
 					}
-					numberOfParticipants++;
+					
+					numOfParticipants++;
 					//System.out.println(wordbank.get(i).getWord() + wordbank.get(i).getStartTime() + wordbank.get(i).getEndTime());
 				}
 				
@@ -107,7 +111,7 @@ public class AnalyseFile {
 		
 	}
 	
-	public void parseOutput() {
+	public void constructSentences() {
 		//Variabler for å bla gjennom listene
 		int i = 0;
 		int y = 0;
@@ -115,6 +119,7 @@ public class AnalyseFile {
 		String sentence = null;
 		//Midlertidig lagringsplass for startTiden til det første ordet. Brukes for å markere starten av setningen
 		List<Float> temporaryStorage = new ArrayList<Float>();
+		
 		while (wordParticipant1.size() > i && wordParticipant2.size() > y)													   //Looper så lenge listene fortsatt har ord i seg
 		{
 			
@@ -147,6 +152,10 @@ public class AnalyseFile {
 		System.out.println("jeg håper det står Dette: " + wordParticipant1.get(0).getWord());
 		System.out.println("jeg håper det står en: " + wordParticipant1.get(2).getWord());
 		System.out.println("jeg håper det står nå " + wordParticipant1.get(12).getWord()); */
+	}
+	
+	public Participant getParticipantData(int parIndex) {
+		return participantData.get(parIndex);
 	}
 	
 }

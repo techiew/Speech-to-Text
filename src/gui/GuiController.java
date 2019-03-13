@@ -31,6 +31,7 @@ public class GuiController {
     @FXML
     private Label labelFeedbackMsg;
 
+    //Kode for "velg filer" knappen
     @FXML
     public void chooseFiles(ActionEvent event) {
 
@@ -64,6 +65,7 @@ public class GuiController {
        buttonStartProcessing.setDisable(false);
     }
 
+    //Kode for "start analyse" knappen
     @FXML
     void startFileAnalysis(ActionEvent event) {
     	

@@ -12,7 +12,6 @@ public class Gui extends Application {
 	public static Stage primaryStage;
 	public static SpeechToText parentObject;
 	
-
     public void startApplication(SpeechToText stt) {
     	Gui.parentObject = stt;
     	launch();

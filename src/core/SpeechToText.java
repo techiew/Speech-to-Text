@@ -20,7 +20,35 @@ public class SpeechToText {
 	//Callback function 
 	public void onProcessingDone(Chat chat) {
 		this.chat = chat;
-		System.out.println("Jeg klarte det!!!");
+		System.out.println("Jeg klarte det!!! --------------------------------------");
+		
+		ArrayList<Participant> participants = chat.getParticipants();
+		ArrayList<Integer> currentSentence = new ArrayList<Integer>();
+		
+		int totalNumOfSentences = 0;
+		
+		for(int i = 0; i < participants.size(); i++) {
+			totalNumOfSentences += participants.get(i).getSentences().size();
+		}
+		
+		for(int x = 0; x < totalNumOfSentences; x++) {
+			Sentence earliestSentence = new Sentence("", 0.0f, 0.0f);
+			int owner = -1;
+			
+			for(int y = 0; y < participants.size(); y++) {
+				
+				if(participants.get(y).getSentences().get(currentSentence.get(y)).getStartTime() <= earliestSentence.getStartTime()) {
+					earliestSentence = participants.get(y).getSentences().get(y);
+					owner = y;
+					currentSentence.set(y, currentSentence.get(y) + 1);
+				}
+				
+			}
+			
+			System.out.println("Participant " + owner + ":");
+			System.out.println(earliestSentence.getStartTime() + " - " + earliestSentence.getEndTime() + " | " + earliestSentence.getSentence());
+		}
+		
 	}
 	
 	//For å bruke programmet med brukergrensesnittet

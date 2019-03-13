@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 public class Chat {
 
-	public ArrayList<Participant> participants;
+	private ArrayList<Participant> participants;
+	
+	public void addParticipant(Participant p) {
+		this.participants.add(p);
+	}
+	
+	public ArrayList<Participant> getParticipants() {
+		return participants;
+	}
 	
 }

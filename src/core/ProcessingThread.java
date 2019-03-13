@@ -23,7 +23,9 @@ public class ProcessingThread implements Runnable {
 			String gcsUri = uf.uploadFile(selectedFiles.get(i).getAbsolutePath());
 		
 			if(gcsUri.length() > 0) {
-				af.analyseSoundFile(gcsUri);
+				af.analyseSoundFile(gcsUri, selectedFiles.size());
+				af.constructSentences();
+				chat.addParticipant(af.getParticipantData(i));
 			} else {
 				System.out.println("Error: Hoppet over fil nummer " + i + " i analysen, feil med gcsUri");
 			}
