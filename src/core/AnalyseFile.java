@@ -112,7 +112,7 @@ public class AnalyseFile {
 		int i = 0;
 		int y = 0;
 		//Setningen stringen som sendes brukes i parameter av instansiering for Sentence
-		String sentence = null;
+		String sentence = "";
 		//Midlertidig lagringsplass for startTiden til det første ordet. Brukes for å markere starten av setningen
 		List<Float> temporaryStorage = new ArrayList<Float>();
 		boolean participant1Complete = false;
