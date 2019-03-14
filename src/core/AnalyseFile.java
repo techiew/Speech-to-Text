@@ -120,8 +120,8 @@ public class AnalyseFile {
 				}
 				else {
 					if (sentence != "") {
-						System.out.println("Dette er setningene kronologisk: " + sentence);
-						participantList.get(currentOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), word.getEndTime()));
+						//System.out.println("Dette er setningene kronologisk: " + sentence);
+						participantList.get(currentOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), word.getEndTime(), currentOwner));
 						sentence = "";
 						temporaryStorage.clear();
 					}
@@ -131,18 +131,18 @@ public class AnalyseFile {
 		}
 		
 		
-		for (int i = 0; i < participantList.get(0).getSentences().size(); i++) {
+		/*for (int i = 0; i < participantList.get(0).getSentences().size(); i++) {
 			System.out.println("Dette er setningene til person 1 spesifikt: " + participantList.get(0).getSentences().get(i).getSentence());
 		}
 		for (int i = 0; i < participantList.get(1).getSentences().size(); i++) {
 			System.out.println("Dette er setningene til person 2 spesifikt: " + participantList.get(1).getSentences().get(i).getSentence());
-		}
+		} */
 		
 	}
 	
 	//Metode som finner ordet med lavest meanTime og som ikke allerede er tatt ibruk. 
 	private Word getNextWord (ArrayList<Participant> participantWords) {
-	    float minValue = 600;
+	    float minValue = 60000;
 		String nextWordString = "";
 		float nextWordStart = 0;
 		float nextWordEnd = 0;
@@ -173,10 +173,10 @@ public class AnalyseFile {
 		}		return true;
 	}
 	
-	public Participant getParticipantData(int parIndex) {
+	public ArrayList<Participant> getParticipantData() {
 		//return participantList.get(parIndex);
 		//hallo?
-		return new Participant();
+		return participantList;
 	}
 	
 }

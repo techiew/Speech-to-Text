@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class ProcessingThread implements Runnable {
 
 	private SpeechToText stt;
+	private ArrayList<Participant> participantList;
 	
 	public ProcessingThread(SpeechToText stt) {
 		this.stt = stt;
@@ -30,9 +31,10 @@ public class ProcessingThread implements Runnable {
 		
 		}
 		af.constructSentences();
+		participantList = af.getParticipantData();
 		//chat.addParticipant(af.getParticipantData(i));
 		
-		stt.onProcessingDone(chat);
+		stt.onProcessingDone(participantList);
 	}
 
 }

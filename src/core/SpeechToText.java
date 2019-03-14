@@ -11,6 +11,7 @@ public class SpeechToText {
 	private Gui app = new Gui();
 	private Chat chat = new Chat();
 	private ArrayList<File> guiSelectedFiles;
+	private ArrayList<Float> usedSentences = new ArrayList<Float>();
 	
 	public void startProcess() {
 		//Vi gjør prosesseringen i en egen tråd for å ikke fryse GUI'en
@@ -18,11 +19,23 @@ public class SpeechToText {
 	}
 	
 	//Callback function 
-	public void onProcessingDone(Chat chat) {
-		this.chat = chat;
+	public void onProcessingDone(ArrayList<Participant> participantList) {
 		System.out.println("Jeg klarte det!!! --------------------------------------");
+		Sentence currentSentence = null;
+		for (int i = 0; i < participantList.size(); i++) {	
+			for (int y = 0; y < participantList.get(i).getSentences().size(); y++) {
+				currentSentence = getNextSentence(participantList);
+				System.out.println(currentSentence.getSentence());
+				usedSentences.add(currentSentence.getMeanTime());
+			}
+		}
 		
-		ArrayList<Participant> participants = chat.getParticipants();
+		
+		
+		
+		
+		
+		/*ArrayList<Participant> participants = chat.getParticipants();
 		ArrayList<Integer> currentSentence = new ArrayList<Integer>();
 		
 		int totalNumOfSentences = 0;
@@ -47,8 +60,31 @@ public class SpeechToText {
 			
 			System.out.println("Participant " + owner + ":");
 			System.out.println(earliestSentence.getStartTime() + " - " + earliestSentence.getEndTime() + " | " + earliestSentence.getSentence());
-		}
+		} */
 		
+	}
+	
+	private Sentence getNextSentence(ArrayList<Participant> participantSentences) {
+		float minValue = 60000;
+		Sentence sentence = null;
+		for (int i = 0; i < participantSentences.size(); i++) {						
+			for (int y = 0; y < participantSentences.get(i).getSentences().size(); y++) {		
+				if (participantSentences.get(i).getSentences().get(y).getMeanTime() < minValue && validSentence(usedSentences, participantSentences.get(i).getSentences().get(y).getMeanTime()) == true) {
+					minValue = participantSentences.get(i).getSentences().get(y).getMeanTime();	
+					sentence = participantSentences.get(i).getSentences().get(y);
+				}
+			}
+			
+		}
+		return sentence;
+	}
+	
+	private boolean validSentence(ArrayList<Float> usedSentences, float sentence) {
+		for (int i = 0; i < usedSentences.size(); i++) {
+			if (usedSentences.get(i) == sentence) {
+				return false;
+			}
+		}		return true;
 	}
 	
 	//For å bruke programmet med brukergrensesnittet
