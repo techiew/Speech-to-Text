@@ -30,13 +30,15 @@ public class AnalyseFile {
 	private ArrayList<Word> wordParticipant2 = new ArrayList<Word>();
 	private ArrayList<Sentence> sentenceParticipant1 = new ArrayList<Sentence>();
 	private ArrayList<Sentence> sentenceParticipant2 = new ArrayList<Sentence>();
-	private ArrayList<Participant> participantData = new ArrayList<Participant>();
-	static int numOfParticipants = 1;
+	private ArrayList<Participant> participantList = new ArrayList<Participant>();
+	static int participantChecker = 0;
+	private ArrayList<Float> usedWords = new ArrayList<Float>();
 	
-	public void analyseSoundFile(String gcsUri, int numOfParticipantsKYS) {
+	public void analyseSoundFile(String gcsUri, int numOfParticipants) {
 		System.out.println("Dette er nåværende gcsUri:" + gcsUri);
 		//this.numOfParticipants = numOfParticipants;
-		
+		participantList.add(new Participant());
+		System.out.println("added participant");
 		// Instantiates a client with GOOGLE_APPLICATION_CREDENTIALS
 		try (SpeechClient speech = SpeechClient.create()) {
 			
@@ -80,20 +82,13 @@ public class AnalyseFile {
 					float endNanosecond = (wordInfo.getEndTime().getNanos() / 100000000);
 					float endSecond = wordInfo.getEndTime().getSeconds();
 					float timeStampEnd = endSecond + (endNanosecond / 10) + (endNanosecond / 100) + (endNanosecond / 1000);
-					
-					if (numOfParticipants == 1)
-					{
-						wordParticipant1.add(new Word(word, timeStampStart, timeStampEnd));
-					}
-					if (numOfParticipants == 2)
-					{
-						wordParticipant2.add(new Word(word, timeStampStart, timeStampEnd));
-					}
+		
+					participantList.get(participantChecker).addWords(new Word(word, timeStampStart, timeStampEnd, participantChecker));
 					
 					//System.out.println(wordbank.get(i).getWord() + wordbank.get(i).getStartTime() + wordbank.get(i).getEndTime());
 				}
 			}
-			numOfParticipants++;
+			participantChecker++;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,113 +103,80 @@ public class AnalyseFile {
 	}
 	
 	public void constructSentences() {
-		//Variabler for å bla gjennom listene
-		int i = 0;
-		int y = 0;
-		//Setningen stringen som sendes brukes i parameter av instansiering for Sentence
+		int currentOwner = 99;
+		Word word;
 		String sentence = "";
-		//Midlertidig lagringsplass for startTiden til det første ordet. Brukes for å markere starten av setningen
-		List<Float> temporaryStorage = new ArrayList<Float>();
-		boolean participant1Complete = false;
-		boolean participant2Complete = false;
-		
-		while (participant1Complete == false && participant2Complete == false) {
-
-				while (wordParticipant1.get(i).getMeanTime() < wordParticipant2.get(y).getMeanTime() && participant1Complete == false) {
-					temporaryStorage.add(wordParticipant1.get(i).getStartTime());
-					sentence = sentence + " " + wordParticipant1.get(i).getWord();
-					if ((i + 1) == wordParticipant1.size()) {
-						participant1Complete = true;
-						break;
+		ArrayList<Float> temporaryStorage = new ArrayList<Float>();
+		for (int z = 0; z < participantList.size(); z++) {						
+			for (int x = 0; x < participantList.get(z).getWords().size();) {	
+				word = getNextWord(participantList);
+				//System.out.println("currentOwner akkurat nå er: " + currentOwner);
+				if (currentOwner == word.getOwner()) {
+					//System.out.println("han fant en eier");
+					sentence = sentence + " " + word.getWord();
+					temporaryStorage.add(word.getStartTime());
+					usedWords.add(word.getMeanTime());
+					x++;
+				}
+				else {
+					if (sentence != "") {
+						System.out.println("Dette er setningene kronologisk: " + sentence);
+						participantList.get(currentOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), word.getEndTime()));
+						sentence = "";
+						temporaryStorage.clear();
 					}
-					i++;
+					currentOwner = word.getOwner();	
 				}
-				
-			if (!temporaryStorage.isEmpty()) {
-				sentenceParticipant1.add(new Sentence(sentence, temporaryStorage.get(0), wordParticipant1.get(i).getEndTime()));
-				System.out.println("Setning mekka for Person 1:" + sentence);
-				temporaryStorage.clear();
-				sentence = "";
 			}
-			
-				while (wordParticipant2.get(y).getMeanTime() < wordParticipant1.get(i).getMeanTime() && participant2Complete == false) {
-					temporaryStorage.add(wordParticipant2.get(y).getStartTime());
-					sentence = sentence + wordParticipant2.get(y).getWord();
-					if ((y + 1) == wordParticipant2.size()) {
-						participant2Complete = true;
-						break;
-					}
-					y++;
-				}
-				
-			if (!temporaryStorage.isEmpty()) {
-			sentenceParticipant2.add(new Sentence(sentence, temporaryStorage.get(0), wordParticipant2.get(y).getEndTime()));
-			System.out.println("Setning mekka for Person 2:" + sentence);
-			temporaryStorage.clear();
-			sentence = "";
-			}
-			
 		}
-		System.out.println("Setning metoden funka faktisk.");
 		
 		
-		/*System.out.println("De 10 første ordene i Person1:");
-		for (int x = 0; x < wordParticipant1.size(); x++) {
-			System.out.println("Ordet til Person 1: " + wordParticipant1.get(x).getWord() + " StartTid: " + wordParticipant1.get(x).getStartTime() + " SluttTid: " + wordParticipant1.get(x).getEndTime());
+		for (int i = 0; i < participantList.get(0).getSentences().size(); i++) {
+			System.out.println("Dette er setningene til person 1 spesifikt: " + participantList.get(0).getSentences().get(i).getSentence());
 		}
-		System.out.println("De første 10 ordene i Person2");
-		for (int x = 0; x < wordParticipant2.size(); x++) {
-			System.out.println("Ordet til Person 2: " + wordParticipant2.get(x).getWord() + " StartTid: " + wordParticipant2.get(x).getStartTime() + " SluttTid: " + wordParticipant2.get(x).getEndTime());
-		}*/
+		for (int i = 0; i < participantList.get(1).getSentences().size(); i++) {
+			System.out.println("Dette er setningene til person 2 spesifikt: " + participantList.get(1).getSentences().get(i).getSentence());
+		}
 		
-		
-		
-		/*while (wordParticipant1.size() > i && wordParticipant2.size() > y)													   //Looper så lenge listene fortsatt har ord i seg
-		{
-			System.out.println("første while loop starter");
-			while (wordParticipant1.get(i).getEndTime() < wordParticipant2.get(y).getStartTime())							   //Sjekk om at ord X ikke overrider med noen ord fra andre personen
-			{
-				if (wordParticipant1.size() >= i) {
-					System.out.println("endtime på ordet:" + wordParticipant1.get(i).getEndTime());
-					System.out.println("starttime på person 2 ordet:" + wordParticipant2.get(y).getStartTime());
-					System.out.println("Størrelsen på I:" + i);
-					System.out.println("Størrlesen på Participant1:" + wordParticipant1.size());
-					temporaryStorage.add(wordParticipant1.get(i).getStartTime());												   //Adder startTiden i listen. Bare interessert i nummer 0
-					sentence = sentence + wordParticipant1.get(i);                                                                 //Setter ordet i en string
-					i++;
+	}
+	
+	//Metode som finner ordet med lavest meanTime og som ikke allerede er tatt ibruk. 
+	private Word getNextWord (ArrayList<Participant> participantWords) {
+	    float minValue = 600;
+		String nextWordString = "";
+		float nextWordStart = 0;
+		float nextWordEnd = 0;
+		int owner = 0;
+		for (int i = 0; i < participantWords.size(); i++) {						//Blar gjennom hele arrayet
+			for (int y = 0; y < participantWords.get(i).getWords().size(); y++) {				//Blar gjennom hele lista
+				if (participantWords.get(i).getWords().get(y).getMeanTime() < minValue && validWord(usedWords, participantWords.get(i).getWords().get(y).getMeanTime()) == true) {    //Finner minste og sjekker om meanTime er brukt opp
+					minValue = participantWords.get(i).getWords().get(y).getMeanTime();																				//Setter lavere minvalue for neste sjekk
+					nextWordString = participantWords.get(i).getWords().get(y).getWord();	
+					nextWordStart = participantWords.get(i).getWords().get(y).getStartTime();
+					nextWordEnd = participantWords.get(i).getWords().get(y).getEndTime();
+					owner = participantWords.get(i).getWords().get(y).getOwner();
+					//System.out.println("Akkurat nå er I: " + i + "og Y er: " + y);
 				}
 			}
-			sentenceParticipant1.add(new Sentence(sentence, temporaryStorage.get(0), wordParticipant1.get(i).getEndTime()));   //Instansierer ny sentence objekt inn i listen
-			temporaryStorage.clear();																						   //Clearer midlertidig lagringsrommet. Sentence allerede lagd
-			sentence = "";																									   //Clearer setningen. Sentence allerede lagd
-			
-			while (wordParticipant2.get(y).getEndTime() < wordParticipant1.get(i).getStartTime() && i < wordParticipant1.size() && y < wordParticipant2.size())
-			{
-				System.out.println("hei fra andre while loop lol");
-				temporaryStorage.add(wordParticipant2.get(y).getStartTime());
-				sentence = sentence + wordParticipant2.get(y);
-				y++;
+		}
+		Word nextWord = new Word(nextWordString, nextWordStart, nextWordEnd, owner);
+		//System.out.println("Ordet getNextWord fant er: " + nextWord.getWord());
+		return nextWord;
+	}
+	
+	//Metode som sjekker om meanTimen den fant allerede er tatt i bruk
+	private boolean validWord (ArrayList<Float> usedWords, float word) {
+		for (int i = 0; i < usedWords.size(); i++) {
+			if (usedWords.get(i) == word) {
+				return false;
 			}
-			sentenceParticipant2.add(new Sentence(sentence, temporaryStorage.get(0), wordParticipant1.get(y).getEndTime()));
-			temporaryStorage.clear();
-			sentence = "";
-			System.out.println("Størrelsen på I:");
-			System.out.println("Størrelsen på Y:");
-			System.out.println("Størrlesen på Participant1:" + wordParticipant1.size());
-			System.out.println("Størrelsen på Participant2:" + wordParticipant2.size());
-		} */
-		
-		
-		//Hver lydfil har sin egen liste. Ord og timestamps blir satt kronologisk inn i listen, så vi vet at #0 i listen kommer før #1, derfor må vi bare sammenligne liste1.get(0) med liste2.get(0) og
-		//se hvem som er først : )
-		/*System.out.println(wordParticipant1.size());
-		System.out.println("jeg håper det står Dette: " + wordParticipant1.get(0).getWord());
-		System.out.println("jeg håper det står en: " + wordParticipant1.get(2).getWord());
-		System.out.println("jeg håper det står nå " + wordParticipant1.get(12).getWord()); */
+		}		return true;
 	}
 	
 	public Participant getParticipantData(int parIndex) {
-		return participantData.get(parIndex);
+		//return participantList.get(parIndex);
+		//hallo?
+		return new Participant();
 	}
 	
 }

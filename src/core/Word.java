@@ -5,11 +5,13 @@ public class Word {
 	private String word;
 	private float startTime;
 	private float endTime;
+	private int owner;
 	
-	public Word(String word, float startTime, float endTime) {
+	public Word(String word, float startTime, float endTime, int owner) {
 		this.word = word;
 		this.startTime = startTime;
 		this.endTime = endTime;	
+		this.owner = owner;
 	}
 	
 	public String getWord() {
@@ -22,6 +24,10 @@ public class Word {
 	
 	public float getEndTime() {
 		return endTime;
+	}
+	
+	public int getOwner() {
+		return owner;
 	}
 	
 	public float getMeanTime() {

@@ -7,8 +7,8 @@ public class Participant {
 	private int numWordsSpoken = 0;
 	private int wordsPerMinute = 0;
 	
-	private ArrayList<Word> words;
-	private ArrayList<Sentence> sentences;
+	private ArrayList<Word> wordList = new ArrayList<Word>();
+	private ArrayList<Sentence> sentenceList = new ArrayList<Sentence>();
 	
 	public int getNumWordsSpoken() {
 		return numWordsSpoken;
@@ -26,19 +26,19 @@ public class Participant {
 	}
 	
 	public ArrayList<Word> getWords() {
-		return words;
+		return wordList;
 	}
 	
-	public void setWords(ArrayList<Word> words) {
-		this.words = words;
+	public void addWords(Word words) {
+		wordList.add(words);
 	}
 	
 	public ArrayList<Sentence> getSentences() {
-		return sentences;
+		return sentenceList;
 	}
 	
-	public void setSentences(ArrayList<Sentence> sentences) {
-		this.sentences = sentences;
+	public void addSentence(Sentence sentences) {
+		sentenceList.add(sentences);
 	}
 	
 }
