@@ -74,6 +74,7 @@ public class GuiController {
         	labelFeedbackMsg.setText("Analyserer filene...");
         	
     		System.out.println("Disse filene vil bli analysert: ");
+    		
         	for(int i = 0; i < Gui.parentObject.getGuiSelectedFiles().size(); i++) {
         		System.out.println(Gui.parentObject.getGuiSelectedFiles().get(i).getName());
         	}

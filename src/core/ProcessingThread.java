@@ -24,12 +24,13 @@ public class ProcessingThread implements Runnable {
 			String gcsUri = uf.uploadFile(selectedFiles.get(i).getAbsolutePath());
 		
 			if(gcsUri.length() > 0) {
-				af.analyseSoundFile(gcsUri, selectedFiles.size());
+				af.analyseSoundFile(gcsUri);
 			} else {
 				System.out.println("Error: Hoppet over fil nummer " + i + " i analysen, feil med gcsUri");
 			}
 		
 		}
+		
 		af.constructSentences();
 		participantList = af.getParticipantData();
 		//chat.addParticipant(af.getParticipantData(i));

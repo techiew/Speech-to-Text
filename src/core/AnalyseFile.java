@@ -25,20 +25,15 @@ public class AnalyseFile {
 	 *            the path to the remote LINEAR16 audio file to transcribe.
 	 */
 	
-	private List<SpeechRecognitionResult> results;
-	private ArrayList<Word> wordParticipant1 = new ArrayList<Word>();
-	private ArrayList<Word> wordParticipant2 = new ArrayList<Word>();
-	private ArrayList<Sentence> sentenceParticipant1 = new ArrayList<Sentence>();
-	private ArrayList<Sentence> sentenceParticipant2 = new ArrayList<Sentence>();
 	private ArrayList<Participant> participantList = new ArrayList<Participant>();
-	static int participantChecker = 0;
 	private ArrayList<Float> usedWords = new ArrayList<Float>();
+	static int participantChecker = 0;
 	
-	public void analyseSoundFile(String gcsUri, int numOfParticipants) {
+	public void analyseSoundFile(String gcsUri) {
 		System.out.println("Dette er nåværende gcsUri:" + gcsUri);
-		//this.numOfParticipants = numOfParticipants;
 		participantList.add(new Participant());
 		System.out.println("added participant");
+		
 		// Instantiates a client with GOOGLE_APPLICATION_CREDENTIALS
 		try (SpeechClient speech = SpeechClient.create()) {
 			
@@ -60,15 +55,15 @@ public class AnalyseFile {
 				Thread.sleep(10000);
 			}
 
-			results = response.get().getResultsList();
+			List<SpeechRecognitionResult> results = response.get().getResultsList();
 			System.out.println("Svar:");
 			
 			for (SpeechRecognitionResult result : results) {
 				// There can be several alternative transcripts for a given
-				// chunk of speech. Just use the
-				// first (most likely) one here.
+				// chunk of speech. Just use the first (most likely) one here.
 				SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
 				System.out.printf("Transcription: %s\n", alternative.getTranscript());
+				
 				for (WordInfo wordInfo : alternative.getWordsList()) {
 					//finner ordet
 					String word = wordInfo.getWord();
@@ -76,18 +71,20 @@ public class AnalyseFile {
 					// finner start tiden
 					float startNanosecond = (wordInfo.getStartTime().getNanos() / 100000000);
 					float startSecond = wordInfo.getStartTime().getSeconds();
-					float timeStampStart = startSecond + (startNanosecond / 10 + (startNanosecond / 100) + (startNanosecond / 1000));
+					float timeStampStart = startSecond + (startNanosecond / 10);
 					
 					//finner slutt tiden
 					float endNanosecond = (wordInfo.getEndTime().getNanos() / 100000000);
 					float endSecond = wordInfo.getEndTime().getSeconds();
-					float timeStampEnd = endSecond + (endNanosecond / 10) + (endNanosecond / 100) + (endNanosecond / 1000);
-		
+					float timeStampEnd = endSecond + (endNanosecond / 10);
+					
 					participantList.get(participantChecker).addWords(new Word(word, timeStampStart, timeStampEnd, participantChecker));
 					
 					//System.out.println(wordbank.get(i).getWord() + wordbank.get(i).getStartTime() + wordbank.get(i).getEndTime());
 				}
+				
 			}
+			
 			participantChecker++;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -107,8 +104,11 @@ public class AnalyseFile {
 		Word word;
 		String sentence = "";
 		ArrayList<Float> temporaryStorage = new ArrayList<Float>();
-		for (int z = 0; z < participantList.size(); z++) {						
-			for (int x = 0; x < participantList.get(z).getWords().size();) {	
+		
+		for (int z = 0; z < participantList.size(); z++) {
+			
+			for (int x = 0; x < participantList.get(z).getWords().size();) {
+				
 				word = getNextWord(participantList);
 				//System.out.println("currentOwner akkurat nå er: " + currentOwner);
 				if (currentOwner == word.getOwner()) {
@@ -117,19 +117,21 @@ public class AnalyseFile {
 					temporaryStorage.add(word.getStartTime());
 					usedWords.add(word.getMeanTime());
 					x++;
-				}
-				else {
+				} else {
+					
 					if (sentence != "") {
 						//System.out.println("Dette er setningene kronologisk: " + sentence);
 						participantList.get(currentOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), word.getEndTime(), currentOwner));
 						sentence = "";
 						temporaryStorage.clear();
 					}
+					
 					currentOwner = word.getOwner();	
 				}
+				
 			}
+			
 		}
-		
 		
 		/*for (int i = 0; i < participantList.get(0).getSentences().size(); i++) {
 			System.out.println("Dette er setningene til person 1 spesifikt: " + participantList.get(0).getSentences().get(i).getSentence());
@@ -141,36 +143,51 @@ public class AnalyseFile {
 	}
 	
 	//Metode som finner ordet med lavest meanTime og som ikke allerede er tatt ibruk. 
-	private Word getNextWord (ArrayList<Participant> participantWords) {
+	private Word getNextWord(ArrayList<Participant> participantWords) {
 	    float minValue = 60000;
 		String nextWordString = "";
 		float nextWordStart = 0;
 		float nextWordEnd = 0;
 		int owner = 0;
-		for (int i = 0; i < participantWords.size(); i++) {						//Blar gjennom hele arrayet
-			for (int y = 0; y < participantWords.get(i).getWords().size(); y++) {				//Blar gjennom hele lista
-				if (participantWords.get(i).getWords().get(y).getMeanTime() < minValue && validWord(usedWords, participantWords.get(i).getWords().get(y).getMeanTime()) == true) {    //Finner minste og sjekker om meanTime er brukt opp
-					minValue = participantWords.get(i).getWords().get(y).getMeanTime();																				//Setter lavere minvalue for neste sjekk
+		
+		//Blar gjennom hele arrayet
+		for (int i = 0; i < participantWords.size(); i++) { 
+			
+			//Blar gjennom hele lista
+			for (int y = 0; y < participantWords.get(i).getWords().size(); y++) { 
+				
+				if (participantWords.get(i).getWords().get(y).getMeanTime() < minValue && 
+						validWord(usedWords, participantWords.get(i).getWords().get(y).getMeanTime()) == true) { //Finner minste og sjekker om meanTime er brukt opp
+					
+					minValue = participantWords.get(i).getWords().get(y).getMeanTime(); //Setter lavere minvalue for neste sjekk
 					nextWordString = participantWords.get(i).getWords().get(y).getWord();	
 					nextWordStart = participantWords.get(i).getWords().get(y).getStartTime();
 					nextWordEnd = participantWords.get(i).getWords().get(y).getEndTime();
 					owner = participantWords.get(i).getWords().get(y).getOwner();
 					//System.out.println("Akkurat nå er I: " + i + "og Y er: " + y);
 				}
+				
 			}
+			
 		}
+		
 		Word nextWord = new Word(nextWordString, nextWordStart, nextWordEnd, owner);
 		//System.out.println("Ordet getNextWord fant er: " + nextWord.getWord());
 		return nextWord;
 	}
 	
 	//Metode som sjekker om meanTimen den fant allerede er tatt i bruk
-	private boolean validWord (ArrayList<Float> usedWords, float word) {
+	private boolean validWord(ArrayList<Float> usedWords, float word) {
+		
 		for (int i = 0; i < usedWords.size(); i++) {
+			
 			if (usedWords.get(i) == word) {
 				return false;
 			}
-		}		return true;
+			
+		}	
+		
+		return true;
 	}
 	
 	public ArrayList<Participant> getParticipantData() {
