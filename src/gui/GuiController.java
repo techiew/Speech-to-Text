@@ -21,12 +21,18 @@ public class GuiController {
 
     @FXML
     private Button buttonStartProcessing;
-    
+
     @FXML
     private ImageView imageLogo;
 
     @FXML
+    private ImageView imageLoading;
+
+    @FXML
     private Label labelHelp;
+
+    @FXML
+    private Label labelHelp2;
 
     @FXML
     private Label labelFeedbackMsg;
@@ -43,11 +49,11 @@ public class GuiController {
  	   fileChooser.getExtensionFilters().addAll(
  	           new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac")
  	           );
- 	   
+
  	   List<File> selectedFiles = fileChooser.showOpenMultipleDialog(s);
- 	   
+
  	   if (selectedFiles != null) {
- 		   
+
  		   for(int i = 0; i < selectedFiles.size(); i++) {
  	 		   System.out.println(selectedFiles.get(i).getName());
  		   }
@@ -68,18 +74,22 @@ public class GuiController {
     //Kode for "start analyse" knappen
     @FXML
     void startFileAnalysis(ActionEvent event) {
-    	
+
     	if(Gui.parentObject.getGuiSelectedFiles().size() > 0) {
         	buttonStartProcessing.setDisable(true);
         	labelFeedbackMsg.setText("Analyserer filene...");
-        	
+
     		System.out.println("Disse filene vil bli analysert: ");
-    		
         	for(int i = 0; i < Gui.parentObject.getGuiSelectedFiles().size(); i++) {
         		System.out.println(Gui.parentObject.getGuiSelectedFiles().get(i).getName());
         	}
-        	
+
         	Gui.parentObject.startProcess();
+        	labelHelp.setText("Vennligst vent mens lydfilene blir analysert");
+        	labelHelp2.setVisible(false);
+        	imageLoading.setVisible(true);
+        	buttonChooseFiles.setVisible(false);
+        	buttonStartProcessing.setVisible(false);
     	} else {
     		System.out.println("Kunne ikke starte analysen, feil med valgte filer");
     	}
