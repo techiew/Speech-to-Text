@@ -54,10 +54,6 @@ public class GuiController {
 
  	   if (selectedFiles != null) {
 
- 		   for(int i = 0; i < selectedFiles.size(); i++) {
- 	 		   System.out.println(selectedFiles.get(i).getName());
- 		   }
-
  	   } else {
  		   System.out.println("Feil med valgte filer");
  		   Gui.parentObject.setGuiSelectedFiles(null);
@@ -65,8 +61,12 @@ public class GuiController {
  		   return;
  	   }
 
- 	   labelFeedbackMsg.setText("Du har valgt " + selectedFiles.size() + " filer");
-
+ 	   if(selectedFiles.size() > 1) {
+ 		   labelFeedbackMsg.setText("Du har valgt " + selectedFiles.size() + " filer");
+ 	   } else {
+ 		   labelFeedbackMsg.setText("Du har valgt " + selectedFiles.size() + " fil");
+ 	   }
+ 	   
        Gui.parentObject.setGuiSelectedFiles(selectedFiles);
        buttonStartProcessing.setDisable(false);
     }
@@ -90,10 +90,24 @@ public class GuiController {
         	imageLoading.setVisible(true);
         	buttonChooseFiles.setVisible(false);
         	buttonStartProcessing.setVisible(false);
+        	buttonChooseFiles.setDisable(true);
     	} else {
     		System.out.println("Kunne ikke starte analysen, feil med valgte filer");
     	}
 
+    }
+    
+    //Nullstiller vinduet når vi er ferdig med en analyse, slik at vi kan bruke vinduet igjen
+    public void resetWindowState() {
+        buttonStartProcessing.setDisable(true);
+    	buttonChooseFiles.setDisable(false);
+    	buttonChooseFiles.setVisible(true);
+    	buttonStartProcessing.setVisible(true);
+    	imageLoading.setVisible(false);
+        labelHelp.setText("Velg en eller flere lydfiler med tale");
+        labelFeedbackMsg.setText("Lydfilene ble analysert og resultatene lagret.");
+        labelHelp.setVisible(true);
+        labelHelp2.setVisible(true);
     }
 
 }

@@ -34,8 +34,6 @@ public class UploadFile {
 	}
 	
 	private void initSoundFile(String filePath) {
-	    //String gcsUri = "gs://itx_test1_test2/test2";
-		
 		File f = new File(filePath);
 		
 		byte[] soundFileByteArray = new byte[(int) f.length()];
@@ -46,17 +44,13 @@ public class UploadFile {
 			fis.read(soundFileByteArray);
 			fis.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		System.out.println("Filnavnet er: " + f.getName());
+		System.out.println("Laster opp fil: " + f.getName());
 		
-		//new ITX(gcsUri);
-		//uploadFileToGoogleCloud(soundFileByteArray, f.getName());
 		selectedSoundFileBytes = soundFileByteArray;
 		selectedSoundFileName = f.getName();
 	}

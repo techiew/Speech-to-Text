@@ -27,12 +27,10 @@ public class AnalyseFile {
 	
 	private ArrayList<Participant> participantList = new ArrayList<Participant>();
 	private ArrayList<Float> usedWords = new ArrayList<Float>();
-	static int participantChecker = 0;
+	private int participantChecker = 0;
 	
 	public void analyseSoundFile(String gcsUri) {
-		System.out.println("Dette er nåværende gcsUri:" + gcsUri);
 		participantList.add(new Participant());
-		System.out.println("added participant");
 		
 		// Instantiates a client with GOOGLE_APPLICATION_CREDENTIALS
 		try (SpeechClient speech = SpeechClient.create()) {
@@ -51,12 +49,11 @@ public class AnalyseFile {
 					.longRunningRecognizeAsync(config, audio);
 			
 			while (!response.isDone()) {
-				System.out.println("Venter på respons...");
+				System.out.println("Venter på respons fra Google...");
 				Thread.sleep(10000);
 			}
 
 			List<SpeechRecognitionResult> results = response.get().getResultsList();
-			System.out.println("Svar:");
 			
 			for (SpeechRecognitionResult result : results) {
 				// There can be several alternative transcripts for a given
@@ -79,8 +76,6 @@ public class AnalyseFile {
 					float timeStampEnd = endSecond + (endNanosecond / 10);
 					
 					participantList.get(participantChecker).addWords(new Word(word, timeStampStart, timeStampEnd, participantChecker));
-					
-					//System.out.println(wordbank.get(i).getWord() + wordbank.get(i).getStartTime() + wordbank.get(i).getEndTime());
 				}
 				
 			}
@@ -99,46 +94,51 @@ public class AnalyseFile {
 		
 	}
 	
-	public void constructSentences() {
-		int currentOwner = 99;
-		Word word;
-		String sentence = "";
+	public void constructSentences() {		
+		int prevOwner = -1;
 		ArrayList<Float> temporaryStorage = new ArrayList<Float>();
+		String sentence = "";
+		int totalWords = 0;
+		int wordCount = 0;
+		
+		for(int i = 0; i < participantList.size(); i++) {
+			totalWords += participantList.get(i).getWords().size();
+		}
 		
 		for (int z = 0; z < participantList.size(); z++) {
-			
-			for (int x = 0; x < participantList.get(z).getWords().size();) {
+
+			for (int x = 0; x < participantList.get(z).getWords().size(); x++) {
+				Word word = getNextWord(participantList);
 				
-				word = getNextWord(participantList);
-				//System.out.println("currentOwner akkurat nå er: " + currentOwner);
-				if (currentOwner == word.getOwner()) {
-					//System.out.println("han fant en eier");
+				if (prevOwner == word.getOwner()) {
 					sentence = sentence + " " + word.getWord();
 					temporaryStorage.add(word.getStartTime());
 					usedWords.add(word.getMeanTime());
-					x++;
 				} else {
 					
 					if (sentence != "") {
-						//System.out.println("Dette er setningene kronologisk: " + sentence);
-						participantList.get(currentOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), word.getEndTime(), currentOwner));
+						if(sentence.charAt(0) == ' ') sentence = sentence.substring(1);
+						participantList.get(prevOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), word.getEndTime(), prevOwner));
 						sentence = "";
 						temporaryStorage.clear();
 					}
-					
-					currentOwner = word.getOwner();	
+						
+					sentence = sentence + " " + word.getWord();
+					temporaryStorage.add(word.getStartTime());
+					usedWords.add(word.getMeanTime());
 				}
 				
+				wordCount++;
+				
+				if(wordCount == totalWords) {
+					if(sentence.charAt(0) == ' ') sentence = sentence.substring(1);
+					participantList.get(prevOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), word.getEndTime(), prevOwner));
+				}
+				
+				prevOwner = word.getOwner();
 			}
 			
 		}
-		
-		/*for (int i = 0; i < participantList.get(0).getSentences().size(); i++) {
-			System.out.println("Dette er setningene til person 1 spesifikt: " + participantList.get(0).getSentences().get(i).getSentence());
-		}
-		for (int i = 0; i < participantList.get(1).getSentences().size(); i++) {
-			System.out.println("Dette er setningene til person 2 spesifikt: " + participantList.get(1).getSentences().get(i).getSentence());
-		} */
 		
 	}
 	
@@ -172,16 +172,15 @@ public class AnalyseFile {
 		}
 		
 		Word nextWord = new Word(nextWordString, nextWordStart, nextWordEnd, owner);
-		//System.out.println("Ordet getNextWord fant er: " + nextWord.getWord());
 		return nextWord;
 	}
 	
 	//Metode som sjekker om meanTimen den fant allerede er tatt i bruk
-	private boolean validWord(ArrayList<Float> usedWords, float word) {
+	private boolean validWord(ArrayList<Float> usedWords, float wordTime) {
 		
 		for (int i = 0; i < usedWords.size(); i++) {
 			
-			if (usedWords.get(i) == word) {
+			if (usedWords.get(i) == wordTime) {
 				return false;
 			}
 			
@@ -191,9 +190,11 @@ public class AnalyseFile {
 	}
 	
 	public ArrayList<Participant> getParticipantData() {
-		//return participantList.get(parIndex);
-		//hallo?
 		return participantList;
+	}
+	
+	public void generateMetadata() {
+		
 	}
 	
 }

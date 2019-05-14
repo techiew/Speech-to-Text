@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Participant {
 
+	//Metadata
 	private int numWordsSpoken = 0;
 	private int wordsPerMinute = 0;
 	

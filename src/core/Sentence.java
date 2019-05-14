@@ -7,6 +7,7 @@ public class Sentence {
 	private float endTime;
 	private float owner;
 	
+	//Setninger består av grupper med ord som varer til et annet medlem i samtalen begynner å prate
 	public Sentence(String sentence, float startTime, float endTime, float owner) {
 		this.sentence = sentence;
 		this.startTime = startTime;

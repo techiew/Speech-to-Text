@@ -6,7 +6,7 @@ public class Chat {
 
 	private ArrayList<Participant> participants;
 	
-	public void addParticipant(ArrayList<Participant> p) {
+	public void setParticipants(ArrayList<Participant> p) {
 		this.participants = p;
 	}
 	
