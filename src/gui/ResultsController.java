@@ -93,16 +93,23 @@ public class ResultsController {
 				
 				prevOwner = (int)currentSentence.getOwner();
 				
-				chatGridPane.add(bubble, col, chatHeight);
+				SentenceBubble participantNumber = new SentenceBubble("Deltaker " + (((int)currentSentence.getOwner()) + 1), 1, 0);
+				participantNumber.setEditable(false);
+				chatGridPane.add(participantNumber, col, chatHeight);
+				chatGridPane.setMargin(participantNumber, new Insets(0, 15, -20, 10));
+				
+				bubble.setEditable(false);
+				chatGridPane.add(bubble, col, chatHeight + 1);
 				chatGridPane.setMargin(bubble, new Insets(5, 15, 5, 15));
 				
 				SentenceBubble timestamp = new SentenceBubble("~" + currentSentence.getMeanTime() + "s", 1, 0);
-				chatGridPane.add(timestamp, col, chatHeight + 1);
+				timestamp.setEditable(false);
+				chatGridPane.add(timestamp, col, chatHeight + 2);
 				chatGridPane.setMargin(timestamp, new Insets(-5, 15, 0, 15));
 				
 				usedSentences.add(currentSentence.getMeanTime());
 				
-				chatHeight += 2;
+				chatHeight += 3;
 			}
 			
 		}

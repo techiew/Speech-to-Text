@@ -28,7 +28,7 @@ public class SentenceBubble extends TextArea {
 		
 		color = colors[colorIndex];
 		
-		if(type != 1) {
+		if(type == 0) {
 			this.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 14));
 			this.setText(sentence);
 			this.setMinHeight(70);
@@ -37,7 +37,8 @@ public class SentenceBubble extends TextArea {
 		} else {
 			this.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 12));
 			this.setText(sentence);
-			this.setStyle("-fx-text-fill: gray; -fx-background-color: transparent; -fx-control-inner-background: transparent;");
+			this.setStyle("-fx-text-fill: gray; -fx-background-color: transparent; -fx-control-inner-background: transparent; "
+					+ "-fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-highlight-fill: transparent; -fx-highlight-text-fill: gray;");
 		}
 		
 		this.setWrapText(true);
