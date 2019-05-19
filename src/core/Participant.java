@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+// Datastruktur for en enkelt samtaledeltaker, inneholder setningene og orda dems
+// Og litt metadata
 public class Participant {
 
 	//Metadata

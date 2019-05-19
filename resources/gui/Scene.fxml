@@ -64,7 +64,7 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <Label fx:id="labelHelp2" alignment="CENTER" prefHeight="27.0" prefWidth="9999999.0" text="(Bruk CTRL + venstre museklikk i explorer for å velge flere filer)" textAlignment="CENTER">
+                  <Label fx:id="labelHelp2" alignment="CENTER" prefHeight="27.0" prefWidth="9999999.0" text="(Bruk CTRL + venstre museklikk i Explorer for å velge flere filer)" textAlignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -91,14 +91,9 @@
                <children>
                   <MenuBar prefHeight="25.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                     <menus>
-                      <Menu mnemonicParsing="false" text="Fil">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Lukk" />
-                        </items>
-                      </Menu>
                       <Menu mnemonicParsing="false" text="Hjelp">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Om oss" />
+                          <MenuItem mnemonicParsing="false" onAction="#showInfoBox" text="Om Programmet" />
                         </items>
                       </Menu>
                     </menus>

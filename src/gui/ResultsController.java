@@ -33,6 +33,7 @@ public class ResultsController {
 	
 	private int chatHeight = 1;
 	
+	// Lag den Messenger-aktige strukturen i samtalevisningen
     public void createChatLog(String fileToRead) {
     	JSONParser parser = new JSONParser();
     	ArrayList<Participant> participantList = new ArrayList<Participant>();
@@ -116,6 +117,7 @@ public class ResultsController {
 		
     }
     
+    // Få neste, tidligste setningen i setninglisten
 	private Sentence getNextSentence(ArrayList<Participant> participantSentences) {
 		float minValue = 999999;
 		Sentence sentence = new Sentence("ERROR", 0.0f, 0.0f, 0);
@@ -138,6 +140,7 @@ public class ResultsController {
 		return sentence;
 	}
 	
+	// Har vi brukt denne setningen før? i så fall hopper vi over den
 	private boolean validSentence(ArrayList<Float> usedSentences, float sentenceMeanTime) {
 		
 		for (int i = 0; i < usedSentences.size(); i++) {

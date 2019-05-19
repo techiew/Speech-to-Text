@@ -4,24 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import com.google.api.gax.longrunning.OperationFuture;
-import com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata;
-import com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse;
-import com.google.cloud.speech.v1p1beta1.RecognitionAudio;
-import com.google.cloud.speech.v1p1beta1.RecognitionConfig;
-import com.google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
-import com.google.cloud.speech.v1p1beta1.SpeechClient;
-import com.google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative;
-import com.google.cloud.speech.v1p1beta1.SpeechRecognitionResult;
-import core.AnalyseFile;
 
+// Klasse som laster opp lydfiler til Google sine servere
+// slik at vi kan bruke dems Speech-to-Text API
 public class UploadFile {
 
 	private byte[] selectedSoundFileBytes;
@@ -33,6 +23,7 @@ public class UploadFile {
 		return gcsUri;
 	}
 	
+	// Finn filen og les dataene til den
 	private void initSoundFile(String filePath) {
 		File f = new File(filePath);
 		
@@ -55,8 +46,9 @@ public class UploadFile {
 		selectedSoundFileName = f.getName();
 	}
 	
+	// Last opp filen og få tak i dens "gcsUri", som vi bruker
+	// til å peke til filene på serverne dems
 	private String uploadFileToGoogleCloud(byte[] soundFileByteArray, String filename) {
-		
 		Storage storage = StorageOptions.getDefaultInstance().getService();
 		BlobId blobId = BlobId.of("goodest_team_lydfiler", filename);
 		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();

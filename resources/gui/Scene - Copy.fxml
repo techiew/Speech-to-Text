@@ -14,21 +14,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane prefHeight="300.0" prefWidth="425.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GuiController">
    <bottom>
       <VBox prefHeight="0.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <StackPane prefHeight="150.0" prefWidth="999999.0">
+                  <StackPane prefHeight="125.0" prefWidth="999999.0">
                      <children>
-                        <Button fx:id="buttonStartProcessing" disable="true" mnemonicParsing="false" onAction="#startFileAnalysis" prefHeight="30.0" prefWidth="113.0" text="Analyser filene" StackPane.alignment="CENTER_LEFT">
+                        <Button fx:id="buttonStartProcessing" disable="true" mnemonicParsing="false" onAction="#startFileAnalysis" prefHeight="30.0" prefWidth="113.0" text="Analyser filene" StackPane.alignment="CENTER_RIGHT">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="buttonChooseFiles" alignment="CENTER" mnemonicParsing="false" onAction="#chooseFiles" prefHeight="30.0" prefWidth="113.0" text="Velg filer" StackPane.alignment="CENTER_RIGHT">
+                        <Button fx:id="buttonChooseFiles" alignment="CENTER" mnemonicParsing="false" onAction="#chooseFiles" prefHeight="30.0" prefWidth="113.0" text="Velg filer" textAlignment="CENTER" StackPane.alignment="CENTER_LEFT">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -40,7 +39,7 @@
                         </ImageView>
                      </children>
                      <padding>
-                        <Insets left="60.0" right="60.0" />
+                        <Insets bottom="-5.0" left="60.0" right="60.0" />
                      </padding>
                   </StackPane>
                </children>
@@ -52,7 +51,7 @@
                         <Font size="14.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="5.0" />
                      </HBox.margin>
                   </Label>
                </children>
@@ -65,7 +64,7 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <Label fx:id="labelHelp2" alignment="CENTER" prefHeight="27.0" prefWidth="9999999.0" text="(Bruk CTRL + venstre museklikk i explorer for å velge flere filer)" textAlignment="CENTER">
+                  <Label fx:id="labelHelp2" alignment="CENTER" prefHeight="27.0" prefWidth="9999999.0" text="(Bruk CTRL + venstre museklikk i Explorer for å velge flere filer)" textAlignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -92,14 +91,9 @@
                <children>
                   <MenuBar prefHeight="25.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                     <menus>
-                      <Menu mnemonicParsing="false" text="Fil">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Lukk" />
-                        </items>
-                      </Menu>
                       <Menu mnemonicParsing="false" text="Hjelp">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Om oss" />
+                          <MenuItem mnemonicParsing="false" onAction="#showInfoBox" text="Om Programmet" />
                         </items>
                       </Menu>
                     </menus>

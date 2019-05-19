@@ -1,5 +1,6 @@
 package core;
 
+// Datastruktur for ord
 public class Word {
 
 	private String word;

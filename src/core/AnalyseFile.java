@@ -15,27 +15,22 @@ import com.google.cloud.speech.v1p1beta1.SpeechRecognitionResult;
 import com.google.cloud.speech.v1p1beta1.WordInfo;
 import com.google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding;
 
+// Klasse som bruker Google sin API for å finne ord med timestamps fra lydfiler
 public class AnalyseFile {
-	
-	/**
-	 * Performs non-blocking speech recognition on remote FLAC file and prints
-	 * the transcription.
-	 *
-	 * @param gcsUri
-	 *            the path to the remote LINEAR16 audio file to transcribe.
-	 */
 	
 	private ArrayList<Participant> participantList = new ArrayList<Participant>();
 	private ArrayList<Float> usedWords = new ArrayList<Float>();
 	private int participantChecker = 0;
 	
+	// Starter en analyse på filen som ligger klar på Google sin server
+	// gcsUri er linken til filen på serveren
 	public void analyseSoundFile(String gcsUri) {
 		participantList.add(new Participant());
 		
-		// Instantiates a client with GOOGLE_APPLICATION_CREDENTIALS
+		// Starter en klient med GOOGLE_APPLICATION_CREDENTIALS
 		try (SpeechClient speech = SpeechClient.create()) {
 			
-			// Configure remote file request for Linear16
+			// Konfigurasjonen på filen som vi lastet opp
 			RecognitionConfig config = RecognitionConfig.newBuilder()
 					.setEncoding(AudioEncoding.LINEAR16)
 					.setLanguageCode("NO")
@@ -44,7 +39,7 @@ public class AnalyseFile {
 			
 			RecognitionAudio audio = RecognitionAudio.newBuilder().setUri(gcsUri).build();
 			
-			// Use non-blocking call for getting file transcription
+			// Her starter vi transkripsjonen, vi må vente på svar
 			OperationFuture<LongRunningRecognizeResponse, LongRunningRecognizeMetadata> response = speech
 					.longRunningRecognizeAsync(config, audio);
 			
@@ -56,25 +51,24 @@ public class AnalyseFile {
 			List<SpeechRecognitionResult> results = response.get().getResultsList();
 			
 			for (SpeechRecognitionResult result : results) {
-				// There can be several alternative transcripts for a given
-				// chunk of speech. Just use the first (most likely) one here.
 				SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
 				System.out.printf("Transcription: %s\n", alternative.getTranscript());
 				
+				// Sjekker listen med ord
 				for (WordInfo wordInfo : alternative.getWordsList()) {
-					//finner ordet
 					String word = wordInfo.getWord();
 					
-					// finner start tiden
+					// Finner start tiden
 					float startNanosecond = (wordInfo.getStartTime().getNanos() / 100000000);
 					float startSecond = wordInfo.getStartTime().getSeconds();
 					float timeStampStart = startSecond + (startNanosecond / 10);
 					
-					//finner slutt tiden
+					// Finner slutt tiden
 					float endNanosecond = (wordInfo.getEndTime().getNanos() / 100000000);
 					float endSecond = wordInfo.getEndTime().getSeconds();
 					float timeStampEnd = endSecond + (endNanosecond / 10);
 					
+					// Legg til ordet til riktig deltaker
 					participantList.get(participantChecker).addWords(new Word(word, timeStampStart, timeStampEnd, participantChecker));
 				}
 				
@@ -94,6 +88,9 @@ public class AnalyseFile {
 		
 	}
 	
+	// Lager setningene ved å sjekke tid på ord, sjekker når noen andre begynner å snakke
+	// Når noen andre har begynt å snakke, så er forrige setning komplett
+	// Og da starter vi på neste
 	public void constructSentences() {		
 		int prevOwner = -1;
 		ArrayList<Float> temporaryStorage = new ArrayList<Float>();
@@ -142,7 +139,7 @@ public class AnalyseFile {
 		
 	}
 	
-	//Metode som finner ordet med lavest meanTime og som ikke allerede er tatt ibruk. 
+	// Finner ordet med lavest meanTime og som ikke allerede er tatt ibruk
 	private Word getNextWord(ArrayList<Participant> participantWords) {
 	    float minValue = 60000;
 		String nextWordString = "";
@@ -175,7 +172,7 @@ public class AnalyseFile {
 		return nextWord;
 	}
 	
-	//Metode som sjekker om meanTimen den fant allerede er tatt i bruk
+	// Sjekker om meanTimen den fant allerede er tatt i bruk
 	private boolean validWord(ArrayList<Float> usedWords, float wordTime) {
 		
 		for (int i = 0; i < usedWords.size(); i++) {

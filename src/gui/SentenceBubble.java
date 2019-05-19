@@ -5,6 +5,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
+// Datastruktur for "bobblene" (tenk Messenger på Facebook)
+// Disse bruker vi i samtalevisningen i resultatvinduet
 public class SentenceBubble extends TextArea {
 	
 	private String[] colors = { 

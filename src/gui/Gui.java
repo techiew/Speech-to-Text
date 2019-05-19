@@ -9,6 +9,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class Gui extends Application {
@@ -44,6 +46,7 @@ public class Gui extends Application {
         
     }
     
+    // Viser resultatene fra analysen i et nytt vindu, dataene leses fra en .json fil
     public void showChatResults(String fileToRead) {
     	System.out.println("Åpner resultatvisning...");
     	
@@ -76,6 +79,7 @@ public class Gui extends Application {
     	
     }
     
+    // Si ifra til dette vinduet sin controller at vi skal nullstille
     public void resetMainWindow() {
     	primaryController.resetWindowState();
     }

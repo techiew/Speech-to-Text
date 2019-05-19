@@ -2,19 +2,16 @@ package json;
 
 import core.Chat;
 import core.Participant;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
+// Klasse for å skrive ut strenger til json filer
+// Her tar vi i bruk json-simple biblioteket for enkel json-behandling
 public class JsonWriter {
 	private JSONObject chat = null;
 	private String lastWrittenFile = null;

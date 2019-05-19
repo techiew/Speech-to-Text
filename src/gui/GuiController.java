@@ -6,8 +6,10 @@ import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -37,7 +39,7 @@ public class GuiController {
     @FXML
     private Label labelFeedbackMsg;
 
-    //Kode for "velg filer" knappen
+    // Kode for "velg filer" knappen
     @FXML
     public void chooseFiles(ActionEvent event) {
 
@@ -47,16 +49,13 @@ public class GuiController {
  	   fileChooser.setInitialDirectory(new File("."));
  	   fileChooser.setTitle("Velg lydfiler");
  	   fileChooser.getExtensionFilters().addAll(
- 	           new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac")
+ 	           new ExtensionFilter(".wav Single-Channel Audio File(s)", "*.wav")
  	           );
 
  	   List<File> selectedFiles = fileChooser.showOpenMultipleDialog(s);
 
- 	   if (selectedFiles != null) {
-
- 	   } else {
- 		   System.out.println("Feil med valgte filer");
- 		   Gui.parentObject.setGuiSelectedFiles(null);
+ 	   if (selectedFiles == null) {
+ 		   System.out.println("Du valgte ingen filer/Feil med valgte filer");
  		   buttonStartProcessing.setDisable(true);
  		   return;
  	   }
@@ -71,7 +70,7 @@ public class GuiController {
        buttonStartProcessing.setDisable(false);
     }
 
-    //Kode for "start analyse" knappen
+    // Kode for "start analyse" knappen
     @FXML
     void startFileAnalysis(ActionEvent event) {
 
@@ -97,7 +96,19 @@ public class GuiController {
 
     }
     
-    //Nullstiller vinduet når vi er ferdig med en analyse, slik at vi kan bruke vinduet igjen
+    // Kode for "Om Programmet" knappen under "Hjelp" i menybaren
+    @FXML
+    void showInfoBox() {
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	alert.setTitle("Om Programmet");
+    	alert.setHeaderText(null);
+    	alert.setContentText("Dette programmet sin funksjon er å transkribere tale fra en eller flere lydfiler"
+    			+ " om til lesbar tekst. Programmet tar i bruk Speech-to-Text API laget av Google."
+    			+ "\n\n Laget for bacheloroppgave i IT på Universitetet i Sørøst-Norge.");
+    	alert.showAndWait();
+    }
+    
+    // Nullstiller vinduet når vi er ferdig med en analyse, slik at vi kan bruke vinduet igjen
     public void resetWindowState() {
         buttonStartProcessing.setDisable(true);
     	buttonChooseFiles.setDisable(false);

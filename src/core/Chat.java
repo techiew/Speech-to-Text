@@ -2,6 +2,7 @@ package core;
 
 import java.util.ArrayList;
 
+// Datastruktur som inneholder alle samtalemedlemmer
 public class Chat {
 
 	private ArrayList<Participant> participants;

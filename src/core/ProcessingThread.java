@@ -3,6 +3,11 @@ package core;
 import java.io.File;
 import java.util.ArrayList;
 
+// Denne tråden gjør det meste av arbeidet, vi bruker en tråd fordi
+// vi bruker en GUI og vi vil ikke at grensesnittet skal stoppe opp.
+// For ITX sin versjon av denne koden så er det ingen GUI
+// (det har dem ikke spurt om og det ville vært unødvendig kode)
+// men vi beholder fortsatt tråden.
 public class ProcessingThread implements Runnable {
 
 	private SpeechToText stt;
