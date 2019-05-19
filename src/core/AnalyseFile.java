@@ -57,7 +57,7 @@ public class AnalyseFile {
 				// Sjekker listen med ord
 				for (WordInfo wordInfo : alternative.getWordsList()) {
 					String word = wordInfo.getWord();
-					
+
 					// Finner start tiden
 					float startNanosecond = (wordInfo.getStartTime().getNanos() / 100000000);
 					float startSecond = wordInfo.getStartTime().getSeconds();

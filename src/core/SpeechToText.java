@@ -19,8 +19,8 @@ public class SpeechToText {
 	public void startProcess() {
 		Thread processing = new Thread(new ProcessingThread(this));
 		processing.setDaemon(true);
-		//processing.start();
-		gui.showChatResults("C:\\Users\\Marius\\Documents\\Programming\\Github repositories\\speech-to-text-itx\\chatdata\\chat_11.05.2019-215706.json");
+		processing.start();
+		//gui.showChatResults("C:\\Users\\Marius\\Documents\\Programming\\Github repositories\\speech-to-text-itx\\chatdata\\chat_11.05.2019-215706.json");
 	}
 	
 	// Callback funksjon, sier ifra når jobben er gjort

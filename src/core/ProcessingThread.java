@@ -40,6 +40,14 @@ public class ProcessingThread implements Runnable {
 		af.constructSentences();
 		participantList = af.getParticipantData();
 		
+//		for(int x = 0; x < participantList.size(); x++) {
+//			
+//			for(int y = 0; y < participantList.get(x).getSentences().size(); y++) {
+//				System.out.println(participantList.get(x).getSentences().get(y).getSentence());
+//			}
+//			
+//		}
+		
 		stt.onProcessingDone(participantList);
 	}
 
