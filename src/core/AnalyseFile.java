@@ -109,19 +109,19 @@ public class AnalyseFile {
 				
 				if (prevOwner == word.getOwner()) {
 					sentence = sentence + " " + word.getWord();
-					temporaryStorage.add(word.getStartTime());
+					temporaryStorage.add(word.getMeanTime());
 					usedWords.add(word.getMeanTime());
 				} else {
 					
 					if (sentence != "") {
 						if(sentence.charAt(0) == ' ') sentence = sentence.substring(1);
-						participantList.get(prevOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), word.getEndTime(), prevOwner));
+						participantList.get(prevOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), temporaryStorage.get(temporaryStorage.size() - 1), prevOwner));
 						sentence = "";
 						temporaryStorage.clear();
 					}
 						
 					sentence = sentence + " " + word.getWord();
-					temporaryStorage.add(word.getStartTime());
+					temporaryStorage.add(word.getMeanTime());
 					usedWords.add(word.getMeanTime());
 				}
 				
@@ -129,7 +129,7 @@ public class AnalyseFile {
 				
 				if(wordCount == totalWords) {
 					if(sentence.charAt(0) == ' ') sentence = sentence.substring(1);
-					participantList.get(prevOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), word.getEndTime(), prevOwner));
+					participantList.get(prevOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), temporaryStorage.get(temporaryStorage.size() - 1), prevOwner));
 				}
 				
 				prevOwner = word.getOwner();
