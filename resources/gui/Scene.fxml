@@ -87,7 +87,7 @@
    <top>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="27.0" prefWidth="425.0">
                <children>
                   <MenuBar prefHeight="25.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                     <menus>
@@ -100,9 +100,18 @@
                   </MenuBar>
                </children>
             </HBox>
+            <HBox alignment="TOP_CENTER">
+               <children>
+                  <Label text="Tale-til-Tekst" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="imageLogo" fitHeight="206.0" fitWidth="348.0" pickOnBounds="true">
+                  <ImageView fx:id="imageLogo" fitHeight="119.0" fitWidth="223.0" pickOnBounds="true">
                      <image>
                         <Image url="@logo.jpg" />
                      </image>

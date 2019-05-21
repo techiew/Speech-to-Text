@@ -52,6 +52,7 @@ public class ProcessingThread implements Runnable {
 		}
 		
 		af.constructSentences();
+		af.generateMetadata();
 		participantList = af.getParticipantData();
 		
 		stt.onProcessingDone(participantList);

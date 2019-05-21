@@ -205,6 +205,10 @@ public class AnalyseFile {
 	// Genererer metadata utifra medlemmene sine data
 	public void generateMetadata() {
 		
+		for(int i = 0; i < participantList.size(); i++) {
+			participantList.get(i).setNumWordsSpoken(participantList.get(i).getWords().size());
+		}
+		
 	}
 	
 	public ArrayList<Participant> getParticipantData() {

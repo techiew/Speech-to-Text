@@ -13,8 +13,8 @@ public class Main {
 		// Under ligger et eksempel av bruk på ITX sitt grensesnitt
 		// som de ønsket at vi skulle ha i koden vår
 		//List<File> wavFiles = new ArrayList<File>();
-		//wavFiles.add(new File("C:\\Users\\Marius\\Documents\\Programming\\Github repositories\\speech-to-text-itx\\lydklipp\\1547736600256-in.wav"));
-		//wavFiles.add(new File("C:\\Users\\Marius\\Documents\\Programming\\Github repositories\\speech-to-text-itx\\lydklipp\\1547736600256-out.wav"));
+		//wavFiles.add(new File("lydfil1.wav"));
+		//wavFiles.add(new File("lydfil2.wav"));
 		//Chat chat = stt.phoneConversationToChat(wavFiles);
 		//printChatToConsole(chat);
 	}

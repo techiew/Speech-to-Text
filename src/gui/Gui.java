@@ -63,6 +63,7 @@ public class Gui extends Application {
 				ResultsController controller = (ResultsController) loader.getController();
 				
 				controller.createChatLog(fileToRead);
+				controller.fillMetadataPane(fileToRead);
 				
 				Stage resultsStage = new Stage();
 				String[] fileNameSplit = fileToRead.split(Pattern.quote("\\"));

@@ -27,6 +27,7 @@ public class JsonWriter {
 			JSONObject currParticipant = (JSONObject) ((JSONArray)obj.get("participants")).get(x);
 			
 			JSONObject metadata = new JSONObject();
+			metadata.put("numWordsSpoken", participants.get(x).getNumWordsSpoken());
 			
 			JSONArray sentences = new JSONArray();
 			
@@ -38,6 +39,7 @@ public class JsonWriter {
 				sentences.add(sentenceObj);
 			}
 			
+			currParticipant.put("metadata", metadata);
 			currParticipant.put("sentences", sentences);
 		}
 		

@@ -14,12 +14,14 @@ import core.Participant;
 import core.Sentence;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 
 public class ResultsController {
 
@@ -28,6 +30,12 @@ public class ResultsController {
 
     @FXML
     private GridPane chatGridPane;
+    
+    @FXML
+    private ScrollPane metadataScrollPane;
+
+    @FXML
+    private GridPane metadataGridPane;
 
 	private ArrayList<Float> usedSentences = new ArrayList<Float>();
 	
@@ -113,6 +121,46 @@ public class ResultsController {
 				chatHeight += 3;
 			}
 			
+		}
+		
+    }
+    
+    public void fillMetadataPane(String fileToRead) {
+    	JSONParser parser = new JSONParser();
+    	ArrayList<Participant> participantList = new ArrayList<Participant>();
+    	
+    	try(FileReader reader = new FileReader(fileToRead)) {
+    		Object obj = parser.parse(reader);
+    		JSONObject chatobj = (JSONObject) obj;
+    		JSONArray participants = (JSONArray) chatobj.get("participants");
+    		
+    		for(int i = 0; i < participants.size(); i++) {
+    			Participant participant = new Participant();
+    			participant.setNumWordsSpoken(((Long)((JSONObject)((JSONObject) participants.get(i)).get("metadata")).get("numWordsSpoken")).intValue());
+				participantList.add(participant);
+    		}
+    		
+    	} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	RowConstraints rc = new RowConstraints();
+    	rc.setMaxHeight(50);
+    	
+		for (int i = 0; i < participantList.size(); i++) {
+			SentenceBubble bubble = new SentenceBubble("Deltaker " + (i + 1) + " metadata:\n"
+					+ "Totalt antall ord sagt = " + participantList.get(i).getNumWordsSpoken(), 2, i);
+			bubble.setEditable(false);
+			metadataGridPane.add(bubble, 0, i+1);
+			metadataGridPane.getRowConstraints().add(rc);
+			metadataGridPane.setMargin(bubble, new Insets(0, 30, 0, 30));
 		}
 		
     }

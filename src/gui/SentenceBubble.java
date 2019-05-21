@@ -36,11 +36,15 @@ public class SentenceBubble extends TextArea {
 			this.setMinHeight(70);
 			this.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-control-inner-background: " + color + ";");
 			
-		} else {
+		} else if(type == 1){
 			this.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 12));
 			this.setText(sentence);
 			this.setStyle("-fx-text-fill: gray; -fx-background-color: transparent; -fx-control-inner-background: transparent; "
 					+ "-fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-highlight-fill: transparent; -fx-highlight-text-fill: gray;");
+		} else {
+			this.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 14));
+			this.setText(sentence);
+			this.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-control-inner-background: " + color + ";");
 		}
 		
 		this.setWrapText(true);

@@ -8,7 +8,6 @@ public class Participant {
 
 	//Metadata
 	private int numWordsSpoken = 0;
-	private int wordsPerMinute = 0;
 	
 	private ArrayList<Word> wordList = new ArrayList<Word>();
 	private ArrayList<Sentence> sentenceList = new ArrayList<Sentence>();
@@ -18,14 +17,6 @@ public class Participant {
 	}
 	public void setNumWordsSpoken(int numWordsSpoken) {
 		this.numWordsSpoken = numWordsSpoken;
-	}
-	
-	public int getWordsPerMinute() {
-		return wordsPerMinute;
-	}
-	
-	public void setWordsPerMinute(int wordsPerMinute) {
-		this.wordsPerMinute = wordsPerMinute;
 	}
 	
 	public ArrayList<Word> getWords() {
