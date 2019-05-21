@@ -9,5 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="src/json/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="src/sox/sox-wrapper.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

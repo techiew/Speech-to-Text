@@ -1,9 +1,7 @@
 package gui;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -55,18 +53,21 @@ public class GuiController {
  	   List<File> selectedFiles = fileChooser.showOpenMultipleDialog(s);
 
  	   if (selectedFiles == null) {
+ 		   showErrorMsg("Du valgte ingen filer/Feil med valgte filer");
  		   System.out.println("Du valgte ingen filer/Feil med valgte filer");
  		   buttonStartProcessing.setDisable(true);
  		   return;
  	   }
 
  	   if(selectedFiles.size() > 1) {
- 		   labelFeedbackMsg.setText("Du har valgt " + selectedFiles.size() + " filer");
+ 		   System.out.println("Du har valgt " + selectedFiles.size() + " filer");
+ 		   showFeedbackMsg("Du har valgt " + selectedFiles.size() + " filer");
  	   } else {
- 		   labelFeedbackMsg.setText("Du har valgt " + selectedFiles.size() + " fil");
+ 		   System.out.println("Du har valgt " + selectedFiles.size() + " fil");
+ 		   showFeedbackMsg("Du har valgt " + selectedFiles.size() + " fil");
  	   }
  	   
-       Gui.parentObject.setGuiSelectedFiles(selectedFiles);
+       Gui.parentObject.setSelectedFiles(selectedFiles);
        buttonStartProcessing.setDisable(false);
     }
 
@@ -74,13 +75,13 @@ public class GuiController {
     @FXML
     void startFileAnalysis(ActionEvent event) {
 
-    	if(Gui.parentObject.getGuiSelectedFiles().size() > 0) {
+    	if(Gui.parentObject.getSelectedFiles().size() > 0) {
         	buttonStartProcessing.setDisable(true);
-        	labelFeedbackMsg.setText("Analyserer filene...");
+        	showFeedbackMsg("Analyserer filene...");
 
     		System.out.println("Disse filene vil bli analysert: ");
-        	for(int i = 0; i < Gui.parentObject.getGuiSelectedFiles().size(); i++) {
-        		System.out.println(Gui.parentObject.getGuiSelectedFiles().get(i).getName());
+        	for(int i = 0; i < Gui.parentObject.getSelectedFiles().size(); i++) {
+        		System.out.println(Gui.parentObject.getSelectedFiles().get(i).getName());
         	}
 
         	Gui.parentObject.startProcess();
@@ -92,6 +93,7 @@ public class GuiController {
         	buttonChooseFiles.setDisable(true);
     	} else {
     		System.out.println("Kunne ikke starte analysen, feil med valgte filer");
+    		showErrorMsg("Kunne ikke starte analysen, feil med valgte filer");
     	}
 
     }
@@ -104,8 +106,19 @@ public class GuiController {
     	alert.setHeaderText(null);
     	alert.setContentText("Dette programmet sin funksjon er å transkribere tale fra en eller flere lydfiler"
     			+ " om til lesbar tekst. Programmet tar i bruk Speech-to-Text API laget av Google."
-    			+ "\n\n Laget for bacheloroppgave i IT på Universitetet i Sørøst-Norge.");
+    			+ "\n\nKriterier for filer som kan brukes i dette programmet:\nLydfilene må være av typen .wav, og de må være monochannel."
+    			+ "\n\nLaget for bacheloroppgave i IT på Universitetet i Sørøst-Norge.");
     	alert.showAndWait();
+    }
+    
+    public void showErrorMsg(String error) {
+    	labelFeedbackMsg.setTextFill(Color.RED);
+    	labelFeedbackMsg.setText(error);
+    }
+    
+    public void showFeedbackMsg(String feedback) {
+    	labelFeedbackMsg.setTextFill(Color.web("#1548FF"));
+    	labelFeedbackMsg.setText(feedback);
     }
     
     // Nullstiller vinduet når vi er ferdig med en analyse, slik at vi kan bruke vinduet igjen

@@ -24,7 +24,7 @@ public class AnalyseFile {
 	
 	// Starter en analyse på filen som ligger klar på Google sin server
 	// gcsUri er linken til filen på serveren
-	public void analyseSoundFile(String gcsUri) {
+	public boolean analyseSoundFile(String gcsUri) {
 		participantList.add(new Participant());
 		
 		// Starter en klient med GOOGLE_APPLICATION_CREDENTIALS
@@ -82,22 +82,26 @@ public class AnalyseFile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 		
+		return true;
 	}
 	
 	// Lager setningene ved å sjekke tid på ord, sjekker når noen andre begynner å snakke
 	// Når noen andre har begynt å snakke, så er forrige setning komplett
 	// Og da starter vi på neste
 	public void constructSentences() {		
-		int prevOwner = -1;
-		ArrayList<Float> temporaryStorage = new ArrayList<Float>();
 		String sentence = "";
 		int totalWords = 0;
 		int wordCount = 0;
+		int prevOwner = -1;
+		float firstWordTime = -1;
+		float lastWordTime = 0;
 		
+		// Teller antall ord for alle medlemmer, sånn at vi kan holde styr på
+		// hvor mange ord vi har gått gjennom senere når vi lager setninger
 		for(int i = 0; i < participantList.size(); i++) {
 			totalWords += participantList.get(i).getWords().size();
 		}
@@ -107,29 +111,42 @@ public class AnalyseFile {
 			for (int x = 0; x < participantList.get(z).getWords().size(); x++) {
 				Word word = getNextWord(participantList);
 				
+				// Hvis samme person fortsatt snakker, legg til nåværende ord i setningen dems,
+				// Hvis ikke, sjekk om setningen består av noe, hvis den gjør det, legg den ferdige setningen
+				// til personen sin liste over setninger. Deretter starter vi med en gang å legge
+				// det nåværende ordet inn i setningen til den nye personen som prater
 				if (prevOwner == word.getOwner()) {
 					sentence = sentence + " " + word.getWord();
-					temporaryStorage.add(word.getMeanTime());
+					lastWordTime = word.getEndTime();
+					if(firstWordTime == -1) firstWordTime = word.getStartTime();
 					usedWords.add(word.getMeanTime());
 				} else {
 					
-					if (sentence != "") {
+					if (sentence.length() > 0 && sentence.trim().length() > 0) {
 						if(sentence.charAt(0) == ' ') sentence = sentence.substring(1);
-						participantList.get(prevOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), temporaryStorage.get(temporaryStorage.size() - 1), prevOwner));
+						participantList.get(prevOwner).addSentence(new Sentence(sentence, firstWordTime, lastWordTime, prevOwner));
 						sentence = "";
-						temporaryStorage.clear();
+						firstWordTime = -1;
 					}
 						
 					sentence = sentence + " " + word.getWord();
-					temporaryStorage.add(word.getMeanTime());
+					lastWordTime = word.getEndTime();
+					if(firstWordTime == -1) firstWordTime = word.getStartTime();
 					usedWords.add(word.getMeanTime());
 				}
 				
 				wordCount++;
 				
+				// Hvis det for en eller annen grunn er samme eier hele veien, 
+				// så vil denne if-sjekken lagre setningen når alle ordene er gått over
 				if(wordCount == totalWords) {
-					if(sentence.charAt(0) == ' ') sentence = sentence.substring(1);
-					participantList.get(prevOwner).addSentence(new Sentence(sentence, temporaryStorage.get(0), temporaryStorage.get(temporaryStorage.size() - 1), prevOwner));
+					
+					if(sentence.length() > 0 && sentence.trim().length() > 0) {
+						if(sentence.charAt(0) == ' ') sentence = sentence.substring(1);
+						lastWordTime = word.getEndTime();
+						participantList.get(word.getOwner()).addSentence(new Sentence(sentence, firstWordTime, lastWordTime, prevOwner));
+					}
+					
 				}
 				
 				prevOwner = word.getOwner();
@@ -141,27 +158,26 @@ public class AnalyseFile {
 	
 	// Finner ordet med lavest meanTime og som ikke allerede er tatt ibruk
 	private Word getNextWord(ArrayList<Participant> participantWords) {
-	    float minValue = 60000;
+	    float minValue = 999999;
 		String nextWordString = "";
 		float nextWordStart = 0;
 		float nextWordEnd = 0;
 		int owner = 0;
 		
-		//Blar gjennom hele arrayet
+		// Blar gjennom alle ord for alle medlemmer, sammenligner tidene
 		for (int i = 0; i < participantWords.size(); i++) { 
 			
-			//Blar gjennom hele lista
 			for (int y = 0; y < participantWords.get(i).getWords().size(); y++) { 
 				
+				//Finner tidligste ord og sjekker om meanTime er brukt opp
 				if (participantWords.get(i).getWords().get(y).getMeanTime() < minValue && 
-						validWord(usedWords, participantWords.get(i).getWords().get(y).getMeanTime()) == true) { //Finner minste og sjekker om meanTime er brukt opp
+						validWord(usedWords, participantWords.get(i).getWords().get(y).getMeanTime()) == true) { 
 					
-					minValue = participantWords.get(i).getWords().get(y).getMeanTime(); //Setter lavere minvalue for neste sjekk
+					minValue = participantWords.get(i).getWords().get(y).getMeanTime();
 					nextWordString = participantWords.get(i).getWords().get(y).getWord();	
 					nextWordStart = participantWords.get(i).getWords().get(y).getStartTime();
 					nextWordEnd = participantWords.get(i).getWords().get(y).getEndTime();
 					owner = participantWords.get(i).getWords().get(y).getOwner();
-					//System.out.println("Akkurat nå er I: " + i + "og Y er: " + y);
 				}
 				
 			}
@@ -186,12 +202,13 @@ public class AnalyseFile {
 		return true;
 	}
 	
-	public ArrayList<Participant> getParticipantData() {
-		return participantList;
-	}
-	
+	// Genererer metadata utifra medlemmene sine data
 	public void generateMetadata() {
 		
+	}
+	
+	public ArrayList<Participant> getParticipantData() {
+		return participantList;
 	}
 	
 }

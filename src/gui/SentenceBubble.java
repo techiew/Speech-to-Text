@@ -12,7 +12,7 @@ public class SentenceBubble extends TextArea {
 	private String[] colors = { 
 		"#14CF13", // Grønn
 		"#139FCD", // Blå
-		"#CD7013", // Oransje
+		"#EE8C2B", // Oransje
 		"#9F13CD", // Lilla
 		"#13CD9F", // Turkis?
 		"#77B300", // Mørkegul/grønn?

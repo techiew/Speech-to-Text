@@ -83,5 +83,13 @@ public class Gui extends Application {
     public void resetMainWindow() {
     	primaryController.resetWindowState();
     }
+    
+    public void showErrorMsg(String error) {
+    	primaryController.showErrorMsg(error);
+    }
+    
+    public void showFeedbackMsg(String feedback) {
+    	primaryController.showFeedbackMsg(feedback);
+    }
 
 }
