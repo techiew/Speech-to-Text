@@ -16,9 +16,9 @@
 
 <BorderPane prefHeight="325.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GuiController">
    <bottom>
-      <VBox prefHeight="88.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="97.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="400.0">
+            <HBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="400.0">
                <children>
                   <StackPane prefHeight="45.0" prefWidth="390.0">
                      <children>
@@ -43,15 +43,18 @@
                      </padding>
                   </StackPane>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="999999.0">
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="labelFeedbackMsg" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="348.0" textAlignment="CENTER" textFill="#1548ff" wrapText="true">
+                  <Label fx:id="labelFeedbackMsg" alignment="BOTTOM_CENTER" prefHeight="27.0" prefWidth="348.0" textAlignment="CENTER" textFill="#1548ff" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets />
                      </HBox.margin>
                   </Label>
                </children>
@@ -84,7 +87,7 @@
       </VBox>
    </center>
    <top>
-      <VBox prefHeight="182.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="173.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="27.0" prefWidth="425.0">
                <children>
