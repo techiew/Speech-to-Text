@@ -14,20 +14,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="300.0" prefWidth="425.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GuiController">
+<BorderPane prefHeight="325.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GuiController">
    <bottom>
-      <VBox prefHeight="0.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="88.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="400.0">
                <children>
-                  <StackPane prefHeight="125.0" prefWidth="999999.0">
+                  <StackPane prefHeight="45.0" prefWidth="390.0">
                      <children>
-                        <Button fx:id="buttonStartProcessing" disable="true" mnemonicParsing="false" onAction="#startFileAnalysis" prefHeight="30.0" prefWidth="113.0" text="Analyser filene" StackPane.alignment="CENTER_RIGHT">
+                        <Button fx:id="buttonStartProcessing" disable="true" mnemonicParsing="false" onAction="#startFileAnalysis" prefHeight="30.0" prefWidth="113.0" text="Analyser filene" StackPane.alignment="BOTTOM_RIGHT">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="buttonChooseFiles" alignment="CENTER" mnemonicParsing="false" onAction="#chooseFiles" prefHeight="30.0" prefWidth="113.0" text="Velg filer" textAlignment="CENTER" StackPane.alignment="CENTER_LEFT">
+                        <Button fx:id="buttonChooseFiles" alignment="CENTER" mnemonicParsing="false" onAction="#chooseFiles" prefHeight="30.0" prefWidth="113.0" text="Velg filer" textAlignment="CENTER" StackPane.alignment="BOTTOM_LEFT">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -60,17 +60,8 @@
       </VBox>
    </bottom>
    <center>
-      <VBox BorderPane.alignment="TOP_CENTER">
+      <VBox prefHeight="63.0" prefWidth="400.0" BorderPane.alignment="TOP_CENTER">
          <children>
-            <HBox alignment="CENTER">
-               <children>
-                  <Label fx:id="labelHelp2" alignment="CENTER" prefHeight="27.0" prefWidth="9999999.0" text="(Bruk CTRL + venstre museklikk i Explorer for å velge flere filer)" textAlignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
             <HBox alignment="CENTER">
                <children>
                   <Label fx:id="labelHelp" alignment="CENTER" contentDisplay="TOP" text="Velg en eller flere lydfiler med tale">
@@ -80,18 +71,26 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" />
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="labelHelp2" alignment="CENTER" prefHeight="27.0" prefWidth="9999999.0" text="(Bruk CTRL + venstre museklikk i Explorer for å velge flere filer)" textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </center>
    <top>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="182.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="27.0" prefWidth="425.0">
                <children>
                   <MenuBar prefHeight="25.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                     <menus>
-                      <Menu mnemonicParsing="false" text="Hjelp">
+                      <Menu mnemonicParsing="false" text="Informasjon">
                         <items>
                           <MenuItem mnemonicParsing="false" onAction="#showInfoBox" text="Om Programmet" />
                         </items>
@@ -100,23 +99,35 @@
                   </MenuBar>
                </children>
             </HBox>
-            <HBox alignment="TOP_CENTER">
+            <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="425.0">
                <children>
-                  <Label text="Tale-til-Tekst" wrapText="true">
+                  <Label prefHeight="46.0" prefWidth="300.0" text="Tale-til-Tekst" wrapText="true">
                      <font>
                         <Font name="System Bold" size="48.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="33.0" prefWidth="425.0">
                <children>
-                  <ImageView fx:id="imageLogo" fitHeight="119.0" fitWidth="223.0" pickOnBounds="true">
+                  <ImageView fx:id="imageLogo" fitHeight="62.0" fitWidth="114.0" pickOnBounds="true">
                      <image>
                         <Image url="@logo.jpg" />
                      </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
