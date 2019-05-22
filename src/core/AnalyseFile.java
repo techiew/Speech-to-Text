@@ -117,8 +117,8 @@ public class AnalyseFile {
 				// det nåværende ordet inn i setningen til den nye personen som prater
 				if (prevOwner == word.getOwner()) {
 					sentence = sentence + " " + word.getWord();
-					lastWordTime = word.getEndTime();
-					if(firstWordTime == -1) firstWordTime = word.getStartTime();
+					lastWordTime = word.getMeanTime();
+					if(firstWordTime == -1) firstWordTime = word.getMeanTime();
 					usedWords.add(word.getMeanTime());
 				} else {
 					
@@ -130,8 +130,8 @@ public class AnalyseFile {
 					}
 						
 					sentence = sentence + " " + word.getWord();
-					lastWordTime = word.getEndTime();
-					if(firstWordTime == -1) firstWordTime = word.getStartTime();
+					lastWordTime = word.getMeanTime();
+					if(firstWordTime == -1) firstWordTime = word.getMeanTime();
 					usedWords.add(word.getMeanTime());
 				}
 				
@@ -143,7 +143,7 @@ public class AnalyseFile {
 					
 					if(sentence.length() > 0 && sentence.trim().length() > 0) {
 						if(sentence.charAt(0) == ' ') sentence = sentence.substring(1);
-						lastWordTime = word.getEndTime();
+						lastWordTime = word.getMeanTime();
 						participantList.get(word.getOwner()).addSentence(new Sentence(sentence, firstWordTime, lastWordTime, prevOwner));
 					}
 					
