@@ -7,3 +7,5 @@ A GUI is included which is meant to visualize the "conversation" happening in th
 The audio files to be processed should belong together in a way where, for example, one audio file contains the first person's speech in a phone call, and the other file the other person's speech. Though the program works completely fine for more than 2 people/audio files, and also with just 1 person/audio file. The audio files need to be single-channel, uploading audio files with more than one audio channel will crash the program. This is not a limitation by Google, but rather a choice by us to simplify the program.
 
 A JSON writer is also present in this project, as to provide an example for long-term storage of the results from Google.
+
+To run this program, proper Google credentials need to be present, also the proper Google Cloud Java libraries need to be installed. The Google API wikis describe how to set this up.
