@@ -9,3 +9,5 @@ The audio files to be processed should belong together in a way where, for examp
 A JSON writer is also present in this project, as to provide an example for long-term storage of the results from Google.
 
 To run this program, proper Google credentials need to be present, also the proper Google Cloud Java libraries need to be installed. The Google API wikis describe how to set this up.
+
+Made for a bachelor's thesis at the University of South-East Norway.
