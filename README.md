@@ -10,4 +10,9 @@ A JSON writer is also present in this project, as to provide an example for long
 
 To run this program, proper Google credentials need to be present, also the proper Google Cloud Java libraries need to be installed. The Google API wikis describe how to set this up.
 
+Sox was used in this program: http://sox.sourceforge.net/
+SoX is a cross-platform (Windows, Linux, MacOS X, etc.) command line utility that can convert various formats of computer audio files in to other formats. It can also apply various effects to these sound files. (From their website)
+
+We used Sox to voluntarily place background noise on the audio files, because the Google APIs ignore silence in the uploaded audio files, which leads to completely butchered chronological order in a normal conversation. To use this in Java, we used a Java wrapper for Sox which we found on Github: https://github.com/corballis/sox-wrapper-java
+
 Made for a bachelor's thesis at the University of South-East Norway.
