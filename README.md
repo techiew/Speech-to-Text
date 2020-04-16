@@ -1,7 +1,7 @@
 # Speech-to-Text
 
 ### How it works
-This program/library transcribes Norwegian speech to text by uploading one or more audio files to Google Cloud and then uses Google's Speech-to-Text API to get the transcription. A Youtube video can be seen here: https://www.youtube.com/watch?v=DYBjBtlrQes&feature=youtu.be
+This program/library transcribes Norwegian speech to text by uploading one or more audio files to Google Cloud and then uses Google's Speech-to-Text API to get the transcription. [A Youtube video can be seen here.](https://www.youtube.com/watch?v=DYBjBtlrQes&feature=youtu.be)
 
 A GUI exists in this program which is meant to visualize the "conversation" happening in the selected audio files. Each audio file is considered one participant in the conversation. In other words, an audio file should contain a recording of one person speaking, preferably to someone else in the other selected files. The program attempts to keep the correct chronological order in the conversation (and is usually decent at it). The visualization is in style of Facebook's Messenger, using differently colored bubbles to represent different participants in the conversation.
 
