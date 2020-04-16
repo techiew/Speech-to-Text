@@ -1,19 +1,17 @@
 # Speech-to-Text
-
-## How it works
 This program/library transcribes Norwegian speech to text by uploading one or more audio files to Google Cloud and then uses Google's Speech-to-Text API to get the transcription. A Youtube video can be seen here: https://www.youtube.com/watch?v=DYBjBtlrQes&feature=youtu.be
 
 A GUI exists in this program which is meant to visualize the "conversation" happening in the selected audio files. Each audio file is considered one participant in the conversation. In other words, an audio file should contain a recording of one person speaking, preferably to someone else in the other selected files. The program attempts to keep the correct chronological order in the conversation (and is usually decent at it). The visualization is in style of Facebook's Messenger, using differently colored bubbles to represent different participants in the conversation.
 
-## Audio files
+### Audio files
 The audio files to be processed should belong together in a way where, for example, one audio file contains the first person's speech in a phone call, and the other file the other person's speech. However the program works completely fine for more than 2 audio files, and also with just 1 audio file. The audio files need to be single-channel, uploading audio files with more than one audio channel will crash the program. This is not a limitation by Google, but rather a choice by us to simplify development.
 
 A JSON writer is present in this project, as to provide an example for long-term storage of the transcriptions from Google.
 
-## Google credentials
+### Google credentials
 To run this program, proper Google credentials need to be present, also the proper Google Cloud Java libraries need to be installed. The Google API wikis describe how to set this up.
 
-## SoX
+### SoX
 SoX was used in this program: http://sox.sourceforge.net/
 SoX is a cross-platform (Windows, Linux, MacOS X, etc.) command line utility that can convert various formats of computer audio files in to other formats. It can also apply various effects to these sound files. (Description from their website)
 
