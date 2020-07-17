@@ -1,7 +1,8 @@
 # Speech-to-Text
 
-### How it works
 [![Youtube Video](https://github.com/techiew/Speech-to-Text/blob/master/thumbnail.png)](https://www.youtube.com/watch?v=DYBjBtlrQes&feature=youtu.be)
+
+### How it works
 
 This program/library transcribes Norwegian speech to text by uploading one or more audio files to Google Cloud and then uses Google's Speech-to-Text API to get the transcription. 
 
