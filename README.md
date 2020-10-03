@@ -1,6 +1,6 @@
 # Speech-to-Text
 
-**The transcription in the video is pretty bad, usually when provided with high quality audio files the transcription is pretty good. The result is based on what the Google API gives us.**
+**The transcription in the video below is pretty bad, however, usually when provided with high quality audio files the transcription is pretty good. The results are based on what the Google API gives us.**
 
 [![Youtube Video](https://github.com/techiew/Speech-to-Text/blob/master/thumbnail.png)](https://www.youtube.com/watch?v=DYBjBtlrQes&feature=youtu.be)
 
